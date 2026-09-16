@@ -1,0 +1,14 @@
+/* TEAM */
+  Lucas Arana
+  Chief Operating Officer, Nexton
+  Buenos Aires, Argentina
+  Site: https://lucasarana.com
+  LinkedIn: https://www.linkedin.com/in/lucasarana/
+  Email: lucas@lucasarana.com
+
+/* SITE */
+  Last update: 2026-09-16
+  Languages: English, Spanish
+  Standards: HTML5, CSS3, vanilla JavaScript
+  Fonts: Bricolage Grotesque, Source Sans 3, JetBrains Mono (Google Fonts)
+  Hosting: GitHub Pages

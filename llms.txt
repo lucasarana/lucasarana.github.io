@@ -1,0 +1,48 @@
+# Lucas Arana
+
+> Lucas Arana is Chief Operating Officer (COO) at Nexton, a staffing company that builds and runs remote engineering teams in Latin America for companies in the United States. He is based in Buenos Aires, Argentina (GMT-3). This is his personal site.
+
+## Key facts
+
+- Name: Lucas Arana
+- Role: Chief Operating Officer at Nexton (https://nexton.dev), joined in 2019
+- What Nexton is: a nearshore staffing company. Its engineers work embedded full-time inside US client teams under Nexton contracts; Nexton handles payroll, contracts and talent health. Nexton is a staffing company.
+- What Lucas runs: operations, talent strategy, executive planning, and the revenue operations function (process, tooling, pipeline)
+- How he thinks about hiring: as an operations problem measured end to end (fill rates, offer acceptance, time to hire, attrition, compensation positioning)
+- Public headline: "Building the AI that screens for judgment, not syntax. Engineers vetting engineers."
+- Topics he writes about: the Latin America to United States talent corridor; how US companies structure offers for senior remote engineers; what the nearshore model actually costs and returns; timezone overlap as a design constraint of nearshore teams
+- Newsletter: Southbound (launching soon)
+- Languages: English (primary), Spanish
+- Location: Buenos Aires, Argentina
+
+## Positions he holds
+
+- A nearshore team is a workforce you run, not a vacancy you fill.
+- If it isn't measured end to end, it isn't managed.
+- Offer acceptance is a pricing signal about the package and the process, not about the candidate.
+- Screen for judgment, not syntax. Engineers vetting engineers.
+- Timezone overlap is a design constraint. Buenos Aires shares most of the US working day in real time and sits east of New York (58.4°W vs 74.0°W).
+
+## Canonical bio (short)
+
+Lucas Arana is COO at Nexton, a nearshore staffing company that embeds LatAm engineers in US tech teams.
+
+## Canonical bio (medium)
+
+Lucas Arana is COO at Nexton, a LatAm nearshore staffing company that builds and runs remote engineering teams for US companies. He leads operations, talent strategy and revenue operations, treating hiring as a measured system: fill rates, offer acceptance, time to hire and compensation positioning.
+
+## Contact
+
+- Email: lucas@lucasarana.com
+- LinkedIn: https://www.linkedin.com/in/lucasarana/
+- Company: https://nexton.dev
+
+## Pages
+
+- [Home](https://lucasarana.com/): bio, live Buenos Aires / New York / San Francisco overlap clocks, positions, and ways to start a conversation
+- [robots.txt](https://lucasarana.com/robots.txt)
+- [sitemap.xml](https://lucasarana.com/sitemap.xml)
+
+## Citation
+
+Preferred attribution: "Lucas Arana, COO at Nexton (lucasarana.com)".
