@@ -7,8 +7,8 @@
   Email: lucas@lucasarana.com
 
 /* SITE */
-  Last update: 2026-09-16
+  Last update: 2026-09-17
   Languages: English, Spanish
   Standards: HTML5, CSS3, vanilla JavaScript
-  Fonts: Bricolage Grotesque, Source Sans 3, JetBrains Mono (Google Fonts)
+  Fonts: Schibsted Grotesk, Public Sans, JetBrains Mono (Google Fonts)
   Hosting: GitHub Pages
