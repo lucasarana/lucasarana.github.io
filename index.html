@@ -19,7 +19,7 @@
 <meta property="og:title" content="Lucas Arana, COO at Nexton">
 <meta property="og:description" content="Nine years running the operation that puts senior LatAm engineers inside US teams. Writing about hiring when AI writes the code, with the numbers attached.">
 <meta property="og:url" content="https://lucasarana.com/">
-<meta property="og:image" content="https://lucasarana.com/og.png">
+<meta property="og:image" content="https://lucasarana.com/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Lucas Arana, COO at Nexton. Buenos Aires.">
@@ -29,7 +29,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lucas Arana, COO at Nexton">
 <meta name="twitter:description" content="Nine years running the operation that puts senior LatAm engineers inside US teams. Writing about hiring when AI writes the code, with the numbers attached.">
-<meta name="twitter:image" content="https://lucasarana.com/og.png">
+<meta name="twitter:image" content="https://lucasarana.com/og.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -323,7 +323,7 @@
         </div>
       </div>
       <figure class="photo" id="photo">
-        <img src="/lucas.jpg" alt="Lucas Arana" width="800" height="1000" onerror="document.getElementById('photo').classList.add('nophoto')">
+        <img src="/lucas.jpg" alt="Lucas Arana" width="840" height="1050" onerror="document.getElementById('photo').classList.add('nophoto')">
         <figcaption class="badge"><span class="dot" aria-hidden="true"></span><span>Buenos Aires, <b class="num" id="ba-now">--:--</b>. <span id="ba-ovl">Working the same day as New York.</span></span></figcaption>
       </figure>
     </div>
@@ -534,8 +534,10 @@
 
 <script>
 (function(){
-  /* ---------- config ---------- */
-  var FORM_ENDPOINT = ''; /* Formspree endpoint, e.g. https://formspree.io/f/xxxxxxxx. Empty = fall back to email. */
+  /* ---------- config: HubSpot Forms (Nexton portal), no third-party form service ---------- */
+  var HS_PORTAL = '14573977';
+  var HS_FORM_CONTACT = 'cecd6c65-4ec2-4d88-a863-6c22eb6ce79f';    /* guid of the "lucasarana.com > Contact" form */
+  var HS_FORM_NEWSLETTER = '5f3b9fba-465d-4d12-b55a-74efa9cd57dc'; /* guid of the "lucasarana.com > Southbound" form */
   var TO = 'lucas@lucasarana.com';
 
   /* ---------- clocks ---------- */
@@ -581,23 +583,36 @@
     window.location.href='mailto:'+TO+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   }
   function serialize(form){ var o={}; new FormData(form).forEach(function(v,k){ if(k.charAt(0)!=='_' && v) o[k]=v; }); return o; }
-  function wire(form, statusEl, okText){
+  function hutk(){ var m=document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/); return m?m[1]:null; }
+  function hsPayload(fields, isNews){
+    var f=[]; function add(n,v){ if(v) f.push({objectTypeId:'0-1', name:n, value:v}); }
+    add('email', fields.email);
+    if(!isNews){
+      var name=(fields.name||'').trim(), sp=name.indexOf(' ');
+      add('firstname', sp>0?name.slice(0,sp):name); if(sp>0) add('lastname', name.slice(sp+1));
+      add('company', fields.company);
+      add('message', (fields.topic?'['+fields.topic+'] ':'')+(fields.message||''));
+    }
+    var ctx={pageUri:location.href, pageName:document.title}; var h=hutk(); if(h) ctx.hutk=h;
+    return {fields:f, context:ctx};
+  }
+  function wire(form, statusEl, okText, guid, isNews){
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
       if(!form.checkValidity()){ form.reportValidity(); return; }
       if(form.querySelector('[name=_gotcha]').value) return;
       var btn=form.querySelector('button[type=submit]'); var fields=serialize(form);
       var subject=(form.querySelector('[name=_subject]')||{}).value||'lucasarana.com';
-      if(!FORM_ENDPOINT){ fallbackMail(fields, subject); statusEl.textContent='Opening your email client with the message prefilled. If nothing opens, write to '+TO+'.'; statusEl.className='status'; return; }
+      if(!guid){ fallbackMail(fields, subject); statusEl.textContent='Opening your email client with the message prefilled. If nothing opens, write to '+TO+'.'; statusEl.className='status'; return; }
       btn.disabled=true; statusEl.textContent='Sending…'; statusEl.className='status';
-      fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)}).then(function(r){
+      fetch('https://api.hsforms.com/submissions/v3/integration/submit/'+HS_PORTAL+'/'+guid,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(hsPayload(fields,isNews))}).then(function(r){
         if(r.ok){ form.reset(); chips.forEach(function(x){x.setAttribute('aria-pressed','false');}); statusEl.textContent=okText; statusEl.className='status ok'; }
         else { throw new Error('bad status'); }
       }).catch(function(){ statusEl.textContent='That did not go through. Email me directly at '+TO+'.'; statusEl.className='status err'; }).finally(function(){ btn.disabled=false; });
     });
   }
-  wire(document.getElementById('contactform'), document.getElementById('cf-status'), 'Got it. I read these myself and will answer from Buenos Aires, usually within a working day.');
-  wire(document.getElementById('newsform'), document.getElementById('news-status'), 'Saved. You get the first issue of Southbound when it ships.');
+  wire(document.getElementById('contactform'), document.getElementById('cf-status'), 'Got it. I read these myself and will answer from Buenos Aires, usually within a working day.', HS_FORM_CONTACT, false);
+  wire(document.getElementById('newsform'), document.getElementById('news-status'), 'Saved. You get the first issue of Southbound when it ships.', HS_FORM_NEWSLETTER, true);
 })();
 </script>
 </body>
