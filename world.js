@@ -4,7 +4,7 @@ import {RenderPass} from './vendor/examples/jsm/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from './vendor/examples/jsm/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from './vendor/examples/jsm/postprocessing/OutputPass.js';
 import {buildWorld,locations} from './build-world.js?v=3';
-import {t,story,stationLabel,applyLanguage,setLanguage,getLanguage} from './language.js?v=3';
+import {t,story,stationLabel,applyLanguage,setLanguage,getLanguage} from './language.js?v=4';
 
 const $=id=>document.getElementById(id),world=$('world'),container=$('scene');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -38,7 +38,7 @@ try{
  composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));
  const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),.48,.55,1.3);composer.addPass(bloom);composer.addPass(new OutputPass());
  const labelContainer=$('world-labels');locations.forEach(loc=>{const button=document.createElement('button');button.className='world-label';button.style.setProperty('--station','#'+loc.color.toString(16).padStart(6,'0'));button.setAttribute('aria-label',t('flyLabel',{place:stationLabel(loc.id)}));const country={us:'us',mexico:'mx',brasil:'br',buenosaires:'ar'}[loc.id];button.innerHTML=(country?'<span class="country-flag flag-'+country+'"></span>':'<span class="label-dot"></span>')+'<span class="label-city">'+stationLabel(loc.id)+'</span><span class="label-sub">'+t(loc.id+'Sub')+'</span>';button.addEventListener('click',()=>{if(!state.started)start(false);goTo(loc.id);});labelContainer.appendChild(button);labels.set(loc.id,button);});
- const nc=document.createElement('canvas');nc.width=512;nc.height=128;const nx=nc.getContext('2d');nx.clearRect(0,0,512,128);nx.font='700 88px Arial';nx.fillStyle='#e9ffed';nx.textAlign='center';nx.fillText('nexton',256,99);const nt=new THREE.CanvasTexture(nc);nt.colorSpace=THREE.SRGBColorSpace;const nextonLogo=new THREE.Sprite(new THREE.SpriteMaterial({map:nt,transparent:true,depthWrite:false}));nextonLogo.position.set(0,5.35,1);nextonLogo.scale.set(4,1,1);scene.add(nextonLogo);
+ const nt=new THREE.TextureLoader().load('./assets/nexton-logo.svg');nt.colorSpace=THREE.SRGBColorSpace;const nextonLogo=new THREE.Sprite(new THREE.SpriteMaterial({map:nt,transparent:true,depthWrite:false,toneMapped:false}));nextonLogo.position.set(0,5.35,1);nextonLogo.scale.set(4.5,4.5*28/111,1);scene.add(nextonLogo);
  const balloon=new THREE.Group();scene.add(balloon);const balloonBody=new THREE.Mesh(new THREE.SphereGeometry(1,16,10),new THREE.MeshStandardMaterial({color:0xe8cbaa,roughness:.8,flatShading:true}));balloonBody.scale.set(1.5,.45,.55);balloon.add(balloonBody);const basket=new THREE.Mesh(new THREE.BoxGeometry(.7,.2,.4),new THREE.MeshStandardMaterial({color:0x5f7372}));basket.position.y=-.6;balloon.add(basket);const fin=new THREE.Mesh(new THREE.BoxGeometry(.4,.6,.06),new THREE.MeshStandardMaterial({color:0xcf9379}));fin.position.set(-1.25,.05,0);balloon.add(fin);
  built.balloon=balloon;
  target.copy(mobile()?new THREE.Vector3(0,-7,0):new THREE.Vector3(-9,0,6));targetGoal.copy(target);viewSize=introView();viewGoal=viewSize;
@@ -69,7 +69,7 @@ function goTo(id){
  document.querySelectorAll('[data-destination]').forEach(b=>b.classList.toggle('selected',b.dataset.destination===id));
  const from=built.ship.position.clone(),to=loc.pad.clone();to.y+=.2;
  const dist=from.distanceTo(to),mid=from.clone().lerp(to,.5);mid.y=Math.max(from.y,to.y)+Math.min(6,dist*.22);
- state.flight={id,curve:new THREE.QuadraticBezierCurve3(from,mid,to),time:0,duration:Math.max(1.6,dist/7)};
+ state.flight={id,curve:new THREE.QuadraticBezierCurve3(from,mid,to),time:0,duration:THREE.MathUtils.clamp(dist/19,.65,1.7)};
  state.status='flying';renderMission();
  targetGoal.set(loc.x*.14,mobile()?1:0,loc.z*.14);tone(261.63,.16,.02);
 }
@@ -171,14 +171,14 @@ function animate(){
  built.update(elapsed,dt,reduced);
  const ship=built.ship;lastShipPosition.copy(ship.position);
  if(state.flight){const f=state.flight;f.time+=dt;const t=Math.min(f.time/f.duration,1),eased=t*t*(3-2*t);ship.position.copy(f.curve.getPoint(eased));if(t>=1){state.flight=null;arrive(f.id);}}
- else if(state.keys.size){const forward=new THREE.Vector3(-Math.sin(yaw),0,-Math.cos(yaw)),right=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));const input=new THREE.Vector3();if(state.keys.has('w')||state.keys.has('arrowup'))input.add(forward);if(state.keys.has('s')||state.keys.has('arrowdown'))input.sub(forward);if(state.keys.has('a')||state.keys.has('arrowleft'))input.sub(right);if(state.keys.has('d')||state.keys.has('arrowright'))input.add(right);input.normalize().multiplyScalar(dt*8);ship.position.add(input);ship.position.x=THREE.MathUtils.clamp(ship.position.x,-26,26);ship.position.z=THREE.MathUtils.clamp(ship.position.z,-27,27);ship.position.y=THREE.MathUtils.lerp(ship.position.y,5,.025);state.lastArrival=null;}
+ else if(state.keys.size){const forward=new THREE.Vector3(-Math.sin(yaw),0,-Math.cos(yaw)),right=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));const input=new THREE.Vector3();if(state.keys.has('w')||state.keys.has('arrowup'))input.add(forward);if(state.keys.has('s')||state.keys.has('arrowdown'))input.sub(forward);if(state.keys.has('a')||state.keys.has('arrowleft'))input.sub(right);if(state.keys.has('d')||state.keys.has('arrowright'))input.add(right);input.normalize().multiplyScalar(dt*16);ship.position.add(input);ship.position.x=THREE.MathUtils.clamp(ship.position.x,-26,26);ship.position.z=THREE.MathUtils.clamp(ship.position.z,-27,27);ship.position.y=THREE.MathUtils.lerp(ship.position.y,5,.025);state.lastArrival=null;}
  else if(!reduced){ship.position.y+=Math.sin(elapsed*3)*.0025;}
  if(state.started&&!state.flight&&state.keys.size){for(const loc of locations){const distance=Math.hypot(ship.position.x-loc.pad.x,ship.position.z-loc.pad.z);if(distance<1.45&&state.lastArrival!==loc.id){state.keys.clear();ship.position.copy(loc.pad);ship.position.y+=.2;arrive(loc.id);break;}}}
  velocity.copy(ship.position).sub(lastShipPosition);const speed=velocity.length()/Math.max(dt,.001);
  if(speed>.05){const angle=Math.atan2(-velocity.x,-velocity.z);let delta=angle-ship.rotation.y;delta=Math.atan2(Math.sin(delta),Math.cos(delta));ship.rotation.y+=delta*.12;ship.rotation.z=THREE.MathUtils.lerp(ship.rotation.z,THREE.MathUtils.clamp(delta*.17,-.3,.3),.08);}else ship.rotation.z*=.92;
  trailClock+=dt;if(speed>1&&trailClock>.06){trailClock=0;const m=built.trail[trailIndex++%built.trail.length];m.position.copy(ship.position);m.userData.life=1;m.visible=true;}
  built.trail.forEach(m=>{if(m.visible){m.userData.life-=dt*.95;m.scale.setScalar(Math.max(.01,m.userData.life*1.7));if(m.userData.life<=0)m.visible=false;}});
- target.lerp(targetGoal,1-Math.exp(-dt*1.7));viewSize=THREE.MathUtils.lerp(viewSize,viewGoal,1-Math.exp(-dt*3));
+ target.lerp(targetGoal,1-Math.exp(-dt*2.8));viewSize=THREE.MathUtils.lerp(viewSize,viewGoal,1-Math.exp(-dt*3));
  const orbit=!state.started&&!dragging&&!reduced?Math.sin(elapsed*.08)*.035:0,az=yaw+orbit;
  camera.position.set(target.x+Math.sin(az)*55*Math.cos(pitch),target.y+Math.sin(pitch)*55,target.z+Math.cos(az)*55*Math.cos(pitch));camera.lookAt(target);
  const aspect=container.clientWidth/container.clientHeight;camera.left=-viewSize*aspect/2;camera.right=viewSize*aspect/2;camera.top=viewSize/2;camera.bottom=-viewSize/2;camera.updateProjectionMatrix();

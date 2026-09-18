@@ -4,7 +4,7 @@
   Buenos Aires, Argentina
   Site: https://lucasarana.com
   LinkedIn: https://www.linkedin.com/in/lucasarana/
-  Email: lucas@lucasarana.com
+  Email: lucas.arana@nexton.dev
 
 /* SITE */
   Last update: 2026-09-17

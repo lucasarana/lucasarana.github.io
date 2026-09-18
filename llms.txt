@@ -45,7 +45,7 @@ Lucas Arana is COO at Nexton, a LatAm nearshore staffing company that builds and
 ## Contact
 
 - Contact form: https://lucasarana.com/#contact
-- Email: lucas@lucasarana.com
+- Email: lucas.arana@nexton.dev
 - LinkedIn: https://www.linkedin.com/in/lucasarana/
 - Company: https://nexton.dev
 
