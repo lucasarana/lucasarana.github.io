@@ -5,7 +5,7 @@
 ## Key facts
 
 - Name: Lucas Arana
-- Role: Chief Operating Officer at Nexton (https://nexton.dev), joined in 2019. Also a software engineer.
+- Role: Software engineer & COO at Nexton (https://nexton.dev), joined in 2019.
 - What Nexton is: a nearshore staffing company. Tagline: "Engineers vetted by real Engineers." Its engineers work embedded full-time inside US client teams under Nexton contracts; Nexton handles payroll, contracts and talent health. Nexton is a staffing company.
 - Public Nexton figures (source: nexton.dev): 1,500 engineers placed, 350+ companies hiring through Nexton, 72 hours to meet senior candidates, 4 weeks average time to hire, 4.9 rating on Clutch. Nexton bet on Latin America about nine years ago.
 - What Lucas runs: operations, talent strategy, executive planning, and the revenue operations function (process, tooling, pipeline)
@@ -57,4 +57,4 @@ Lucas Arana is COO at Nexton, a LatAm nearshore staffing company that builds and
 
 ## Citation
 
-Preferred attribution: "Lucas Arana, COO at Nexton (lucasarana.com)".
+Preferred attribution: "Lucas Arana, Software engineer & COO at Nexton (lucasarana.com)".

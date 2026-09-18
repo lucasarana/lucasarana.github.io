@@ -4,7 +4,7 @@ import {RenderPass} from './vendor/examples/jsm/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from './vendor/examples/jsm/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from './vendor/examples/jsm/postprocessing/OutputPass.js';
 import {buildWorld,locations} from './build-world.js?v=3';
-import {t,story,stationLabel,applyLanguage,setLanguage,getLanguage} from './language.js?v=4';
+import {t,story,stationLabel,applyLanguage,setLanguage,getLanguage} from './language.js?v=5';
 
 const $=id=>document.getElementById(id),world=$('world'),container=$('scene');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -37,8 +37,7 @@ try{
  built=buildWorld(scene);
  composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));
  const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),.48,.55,1.3);composer.addPass(bloom);composer.addPass(new OutputPass());
- const labelContainer=$('world-labels');locations.forEach(loc=>{const button=document.createElement('button');button.className='world-label';button.style.setProperty('--station','#'+loc.color.toString(16).padStart(6,'0'));button.setAttribute('aria-label',t('flyLabel',{place:stationLabel(loc.id)}));const country={us:'us',mexico:'mx',brasil:'br',buenosaires:'ar'}[loc.id];button.innerHTML=(country?'<span class="country-flag flag-'+country+'"></span>':'<span class="label-dot"></span>')+'<span class="label-city">'+stationLabel(loc.id)+'</span><span class="label-sub">'+t(loc.id+'Sub')+'</span>';button.addEventListener('click',()=>{if(!state.started)start(false);goTo(loc.id);});labelContainer.appendChild(button);labels.set(loc.id,button);});
- const nt=new THREE.TextureLoader().load('./assets/nexton-logo.svg');nt.colorSpace=THREE.SRGBColorSpace;const nextonLogo=new THREE.Sprite(new THREE.SpriteMaterial({map:nt,transparent:true,depthWrite:false,toneMapped:false}));nextonLogo.position.set(0,5.35,1);nextonLogo.scale.set(4.5,4.5*28/111,1);scene.add(nextonLogo);
+ const labelContainer=$('world-labels');locations.forEach(loc=>{const button=document.createElement('button');button.className='world-label';button.style.setProperty('--station','#'+loc.color.toString(16).padStart(6,'0'));button.setAttribute('aria-label',t('flyLabel',{place:stationLabel(loc.id)}));button.classList.toggle('brand-label',loc.id==='nexton');button.innerHTML=(loc.id==='nexton'?'<img class="station-logo" src="assets/nexton-logo.svg" alt="" width="111" height="28">':'<span class="label-city">'+stationLabel(loc.id)+'</span>')+'<span class="label-sub">'+t(loc.id+'Sub')+'</span>';button.addEventListener('click',()=>{if(!state.started)start(false);goTo(loc.id);});labelContainer.appendChild(button);labels.set(loc.id,button);});
  const balloon=new THREE.Group();scene.add(balloon);const balloonBody=new THREE.Mesh(new THREE.SphereGeometry(1,16,10),new THREE.MeshStandardMaterial({color:0xe8cbaa,roughness:.8,flatShading:true}));balloonBody.scale.set(1.5,.45,.55);balloon.add(balloonBody);const basket=new THREE.Mesh(new THREE.BoxGeometry(.7,.2,.4),new THREE.MeshStandardMaterial({color:0x5f7372}));basket.position.y=-.6;balloon.add(basket);const fin=new THREE.Mesh(new THREE.BoxGeometry(.4,.6,.06),new THREE.MeshStandardMaterial({color:0xcf9379}));fin.position.set(-1.25,.05,0);balloon.add(fin);
  built.balloon=balloon;
  target.copy(mobile()?new THREE.Vector3(0,-7,0):new THREE.Vector3(-9,0,6));targetGoal.copy(target);viewSize=introView();viewGoal=viewSize;
@@ -101,7 +100,7 @@ function renderDiscovery(){
 }
 function refreshLanguage(){
  $('start-label').textContent=t(built?'enter':'loading');renderMission();
- labels.forEach((button,id)=>{button.querySelector('.label-city').textContent=stationLabel(id);button.querySelector('.label-sub').textContent=t(id+'Sub');button.setAttribute('aria-label',t('flyLabel',{place:stationLabel(id)}));});
+ labels.forEach((button,id)=>{const city=button.querySelector('.label-city');if(city)city.textContent=stationLabel(id);button.querySelector('.label-sub').textContent=t(id+'Sub');button.setAttribute('aria-label',t('flyLabel',{place:stationLabel(id)}));});
  $('sound').setAttribute('aria-label',t(state.sound?'soundOff':'soundOn'));
  $('scene').setAttribute('aria-label',getLanguage()==='en'?'3D world of Argentina, Mexico, Brazil, the United States and Nexton':'Mundo 3D de Argentina, México, Brasil, Estados Unidos y Nexton');
  $('world-labels').setAttribute('aria-label',getLanguage()==='en'?'World destinations':'Destinos del mundo');
@@ -182,7 +181,7 @@ function animate(){
  const orbit=!state.started&&!dragging&&!reduced?Math.sin(elapsed*.08)*.035:0,az=yaw+orbit;
  camera.position.set(target.x+Math.sin(az)*55*Math.cos(pitch),target.y+Math.sin(pitch)*55,target.z+Math.cos(az)*55*Math.cos(pitch));camera.lookAt(target);
  const aspect=container.clientWidth/container.clientHeight;camera.left=-viewSize*aspect/2;camera.right=viewSize*aspect/2;camera.top=viewSize/2;camera.bottom=-viewSize/2;camera.updateProjectionMatrix();
- locations.forEach(loc=>{const height=loc.id==='us'?9.8:loc.id==='nexton'?5.9:loc.id==='brasil'?8.1:loc.id==='buenosaires'?6.2:5.8;projected.set(loc.x,loc.group.position.y+height,loc.z).project(camera);const button=labels.get(loc.id);const x=(projected.x*.5+.5)*container.clientWidth,y=(-projected.y*.5+.5)*container.clientHeight;button.style.left=x+'px';button.style.top=y+'px';const obscured=(!state.started&&!mobile()&&x<innerWidth*.46)||(mobile()&&state.started&&y<235);button.style.visibility=(projected.z>1||x<20||x>innerWidth-20||y<70||y>innerHeight-70||obscured)?'hidden':'visible';});
+ locations.forEach(loc=>{const height=loc.id==='us'?9.8:loc.id==='nexton'?3.4:loc.id==='brasil'?8.1:loc.id==='buenosaires'?6.2:5.8;projected.set(loc.x,loc.group.position.y+height,loc.z).project(camera);const button=labels.get(loc.id);const x=(projected.x*.5+.5)*container.clientWidth,y=(-projected.y*.5+.5)*container.clientHeight;button.style.left=x+'px';button.style.top=y+'px';const obscured=(!state.started&&!mobile()&&x<innerWidth*.46)||(mobile()&&state.started&&y<235);button.style.visibility=(projected.z>1||x<20||x>innerWidth-20||y<70||y>innerHeight-70||obscured)?'hidden':'visible';});
  built.balloon.position.set(-13+Math.sin(elapsed*.055)*12,10+Math.sin(elapsed*.5)*.15,-27+Math.cos(elapsed*.055)*5);built.balloon.rotation.y=-elapsed*.055;
  if(burst){burst.time+=dt;const a=burst.mesh.geometry.attributes.position;for(let i=0;i<burst.velocities.length;i++){const v=burst.velocities[i];a.array[i*3]+=v.x*dt;a.array[i*3+1]+=v.y*dt;a.array[i*3+2]+=v.z*dt;v.y-=dt*1.8;}a.needsUpdate=true;burst.mesh.material.opacity=Math.max(0,1-burst.time/2.6);if(burst.time>2.7){scene.remove(burst.mesh);burst.mesh.geometry.dispose();burst.mesh.material.dispose();burst=null;}}
  composer.render();
