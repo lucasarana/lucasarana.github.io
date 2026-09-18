@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import {addIdentity} from './landmarks.js';
+import {addIdentity} from './landmarks.js?v=7';
+import {batchStaticBoxes} from './batch-static.js?v=7';
 
 export const locations = [
  {id:'us',name:'UNITED STATES',sub:'THE NEXT OPPORTUNITY',color:0xffc780,x:1,y:1,z:-15,r:6.3},
@@ -20,7 +21,7 @@ export function buildWorld(scene){
  function sphere(p,x,y,z,s,c){const m=add(p,sphereGeo,material(c),x,y,z);m.scale.setScalar(s);return m;}
  function cylinder(p,x,y,z,r1,r2,h,c,n=12,extra){return add(p,new THREE.CylinderGeometry(r1,r2,h,n),material(c,extra),x,y,z);}
  function glow(p,x,y,z,r,color){const m=add(p,new THREE.SphereGeometry(r,10,8),material(color,{emissive:color,emissiveIntensity:3.1,roughness:.2}),x,y,z);m.castShadow=false;return m;}
- function ring(p,x,y,z,r,c,thickness=.035){const m=add(p,new THREE.TorusGeometry(r,thickness,6,80),material(c,{emissive:c,emissiveIntensity:2}),x,y,z);m.rotation.x=Math.PI/2;m.castShadow=false;return m;}
+ function ring(p,x,y,z,r,c,thickness=.035){const m=add(p,new THREE.TorusGeometry(r,thickness,12,128),material(c,{emissive:c,emissiveIntensity:2}),x,y,z);m.rotation.x=Math.PI/2;m.castShadow=false;return m;}
  function tree(p,x,z,s=1,c=0x52a28d){cylinder(p,x,.65*s,z,.09*s,.15*s,1.3*s,0x644b41,5);const a=sphere(p,x,1.55*s,z,.73*s,c);a.scale.y=1.15;const b=sphere(p,x+.36*s,1.2*s,z+.1*s,.55*s,c);return a;}
  function palm(p,x,z,s=1){const trunk=cylinder(p,x,.85*s,z,.08*s,.13*s,1.7*s,0x847657,6);trunk.rotation.z=.12;for(let n=0;n<7;n++){const a=n/7*Math.PI*2;const leaf=add(p,new THREE.ConeGeometry(.25*s,1.45*s,3),material(0x53a88f),x+Math.sin(a)*.48*s,1.8*s,z+Math.cos(a)*.48*s);leaf.rotation.set(Math.cos(a)*1.1,a,Math.sin(a)*1.1);}}
  function tinyHuman(p,x,z,c=0xffc780){cylinder(p,x,.27,z,.09,.11,.35,c,7);sphere(p,x,.52,z,.12,0xf4d0aa);box(p,x-.06,.07,z,.07,.18,.08,0x223c52);box(p,x+.06,.07,z,.07,.18,.08,0x223c52);}
@@ -105,8 +106,8 @@ export function buildWorld(scene){
  for(let i=0;i<28;i++){const a=rand()*Math.PI*2,r=23+rand()*17;const m=add(scene,rockGeo,material(0x3b7181),Math.cos(a)*r,-5-rand()*10,Math.sin(a)*r);m.scale.setScalar(.1+rand()*.65);floating.push({mesh:m,y:m.position.y,phase:rand()*7,speed:.4});}
  const particleCount=210,positions=new Float32Array(particleCount*3);for(let i=0;i<particleCount;i++){positions[i*3]=(rand()-.5)*100;positions[i*3+1]=(rand()-.5)*50;positions[i*3+2]=(rand()-.5)*100;}const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(positions,3));const particles=new THREE.Points(pg,new THREE.PointsMaterial({color:0xa9ece0,size:.065,transparent:true,opacity:.65,depthWrite:false}));scene.add(particles);
  const ship=new THREE.Group();ship.scale.setScalar(1.4);scene.add(ship);
- const hull=add(ship,new THREE.SphereGeometry(1,16,10),material(0xdfece3,{metalness:.6,roughness:.35}));hull.scale.set(.28,.17,.59);
- const cockpit=add(ship,new THREE.SphereGeometry(1,14,8),material(0x436979,{emissive:0x29628a,emissiveIntensity:.45,metalness:.7,roughness:.1}),0,.13,-.1);cockpit.scale.set(.19,.14,.28);
+ const hull=add(ship,new THREE.SphereGeometry(1,32,20),material(0xdfece3,{metalness:.6,roughness:.35,flatShading:false}));hull.scale.set(.28,.17,.59);
+ const cockpit=add(ship,new THREE.SphereGeometry(1,32,20),material(0x436979,{emissive:0x29628a,emissiveIntensity:.45,metalness:.7,roughness:.1,flatShading:false}),0,.13,-.1);cockpit.scale.set(.19,.14,.28);
  const wingShape=new THREE.Shape();wingShape.moveTo(-.65,.23);wingShape.lineTo(0,-.25);wingShape.lineTo(.65,.23);wingShape.lineTo(.55,.45);wingShape.lineTo(0,.18);wingShape.lineTo(-.55,.45);wingShape.closePath();const wings=add(ship,new THREE.ExtrudeGeometry(wingShape,{depth:.055,bevelEnabled:true,bevelSize:.02,bevelThickness:.02,bevelSegments:1,steps:1}),material(0x7ca4a9,{metalness:.5,roughness:.35}),0,-.02,0);wings.rotation.x=Math.PI/2;
  box(ship,0,.27,.34,.05,.35,.2,0xffc786);glow(ship,-.44,-.06,.27,.045,0xffd68d);glow(ship,.44,-.06,.27,.045,0xffd68d);
  const exhaust=add(ship,new THREE.ConeGeometry(.13,.7,9),new THREE.MeshBasicMaterial({color:0x9fffe3,transparent:true,opacity:.75,depthWrite:false}),0,-.015,.73);exhaust.rotation.x=Math.PI/2;
@@ -114,6 +115,7 @@ export function buildWorld(scene){
  const shadow=add(scene,new THREE.CircleGeometry(.42,24),new THREE.MeshBasicMaterial({color:0x092539,transparent:true,opacity:.35,depthWrite:false}),0,0,0);shadow.rotation.x=-Math.PI/2;
  ship.position.copy(hub.pad);ship.position.y+=1.3;
  const trail=[];for(let i=0;i<24;i++){const m=glow(scene,0,0,0,.026,0xbfffdc);m.visible=false;trail.push(m);}
+ const graphicsStats=batchStaticBoxes(islands.map(loc=>loc.group),boxGeo,cars.map(car=>car.mesh));
  function update(time,dt,reduced){
   const t=reduced?0:time;
   flags.forEach((flag,i)=>{const a=flag.geometry.attributes.position;for(let n=0;n<a.count;n++){const x=a.getX(n);a.setZ(n,Math.sin(x*3.5-t*2.7+i)*.14*(x+1.125)/2.25);}a.needsUpdate=true;flag.geometry.computeVertexNormals();});
@@ -125,5 +127,5 @@ export function buildWorld(scene){
   routes.forEach((r,i)=>r.sparks.forEach((m,j)=>{const f=(t*.1+j/4+i*.2)%1;m.position.copy(r.curve.getPoint(f));m.scale.setScalar(r.active?1.65:.65);m.material.emissiveIntensity=r.active?5:2;}));
   particles.rotation.y=t*.007;exhaust.scale.y=.75+Math.sin(time*31)*.2;shadow.position.set(ship.position.x,ship.position.y-.9,ship.position.z);
  }
- return {islands,routes,ship,trail,shadow,pickables,update,materials,hub};
+ return {islands,routes,ship,trail,shadow,pickables,update,materials,hub,graphicsStats};
 }

@@ -3,17 +3,22 @@ import {EffectComposer} from './vendor/examples/jsm/postprocessing/EffectCompose
 import {RenderPass} from './vendor/examples/jsm/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from './vendor/examples/jsm/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from './vendor/examples/jsm/postprocessing/OutputPass.js';
-import {buildWorld,locations} from './build-world.js?v=3';
+import {SMAAPass} from './vendor/examples/jsm/postprocessing/SMAAPass.js';
+import {buildWorld,locations} from './build-world.js?v=7';
 import {t,story,stationLabel,applyLanguage,setLanguage,getLanguage} from './language.js?v=6';
 
 const $=id=>document.getElementById(id),world=$('world'),container=$('scene');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobile=()=>innerWidth<601;
+// Supersample standard displays and respect Retina density without oversized buffers.
+const renderRatio=(width,height)=>Math.max(1,Math.min(Math.max(devicePixelRatio,1.5),2,Math.sqrt((mobile()?2600000:5000000)/Math.max(1,width*height))));
+const graphicsDebug=['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).has('graphics-debug');
+let graphicsFrames=0,graphicsSeconds=0,graphicsReported=false,antialiasing='';
 const introView=()=>mobile()?75:innerWidth<1050?57:43;
 const playingView=()=>mobile()?79:innerWidth<1050?58:45;
 const state={started:false,connected:new Set(),complete:false,flight:null,current:null,sound:false,paused:false,keys:new Set(),lastArrival:null,status:'ready',discoveryMode:'note'};
 applyLanguage();
-let renderer,scene,camera,composer,built,frame,clock,lastTime=0,elapsed=0;
+let renderer,scene,camera,composer,bloom,built,frame,clock,lastTime=0,elapsed=0;
 const target=new THREE.Vector3(),targetGoal=new THREE.Vector3();
 let yaw=.63,pitch=.65,viewSize=45,viewGoal=45,dragging=false,dragMoved=false,lastPointer={x:0,y:0},pointerStart={x:0,y:0};
 const velocity=new THREE.Vector3(),lastShipPosition=new THREE.Vector3();
@@ -22,23 +27,33 @@ const labels=new Map(),projected=new THREE.Vector3();
 let burst=null,audioContext=null,musicInterval=null,engineNote=null,trailIndex=0,trailClock=0;
 
 try{
- renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
- renderer.setPixelRatio(Math.min(devicePixelRatio,mobile()?1.35:1.65));
+ renderer=new THREE.WebGLRenderer({antialias:false,alpha:false,powerPreference:'high-performance'});
+ renderer.setPixelRatio(renderRatio(container.clientWidth,container.clientHeight));
  renderer.setSize(container.clientWidth,container.clientHeight);
  renderer.shadowMap.enabled=!mobile();renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;renderer.outputColorSpace=THREE.SRGBColorSpace;
  container.appendChild(renderer.domElement);
  scene=new THREE.Scene();scene.background=new THREE.Color(0x10394a);scene.fog=new THREE.FogExp2(0x164351,.008);
  const hemi=new THREE.HemisphereLight(0xc2f2eb,0x3b3f65,2.05);scene.add(hemi);
- const sun=new THREE.DirectionalLight(0xffd6a3,3.2);sun.position.set(-20,30,10);sun.castShadow=true;sun.shadow.mapSize.set(1536,1536);sun.shadow.camera.left=-33;sun.shadow.camera.right=33;sun.shadow.camera.top=35;sun.shadow.camera.bottom=-35;sun.shadow.camera.near=1;sun.shadow.camera.far=100;sun.shadow.normalBias=.1;sun.shadow.bias=-.00015;scene.add(sun);
+ const sun=new THREE.DirectionalLight(0xffd6a3,3.2);sun.position.set(-20,30,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-33;sun.shadow.camera.right=33;sun.shadow.camera.top=35;sun.shadow.camera.bottom=-35;sun.shadow.camera.near=1;sun.shadow.camera.far=100;sun.shadow.normalBias=.1;sun.shadow.bias=-.00015;scene.add(sun);
  const rim=new THREE.DirectionalLight(0x5dd6ee,1.9);rim.position.set(15,10,-20);scene.add(rim);
  const sky=new THREE.Mesh(new THREE.SphereGeometry(180,24,12),new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,uniforms:{top:{value:new THREE.Color(0x061d35)},bottom:{value:new THREE.Color(0x286475)}},vertexShader:'varying vec3 vPosition;void main(){vPosition=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'uniform vec3 top;uniform vec3 bottom;varying vec3 vPosition;void main(){vec3 d=normalize(vPosition);float t=smoothstep(-.45,.5,d.y);vec3 color=mix(bottom,top,t);float light=pow(max(0.,dot(d,normalize(vec3(-.7,.16,-.3)))),12.);color+=vec3(.18,.12,.07)*light;gl_FragColor=vec4(color,1.);}'}));scene.add(sky);
  camera=new THREE.OrthographicCamera(-40,40,25,-25,.1,300);
  built=buildWorld(scene);
- composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));
- const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),.48,.55,1.3);composer.addPass(bloom);composer.addPass(new OutputPass());
+ // Canvas antialiasing does not cover the offscreen scene used by bloom.
+ const gl=renderer.getContext();
+ const supportedSamples=Array.from(gl.getInternalformatParameter(gl.RENDERBUFFER,gl.RGBA16F,gl.SAMPLES)||[]);
+ const samples=Math.max(0,...supportedSamples.filter(n=>n<=4&&n<=renderer.capabilities.maxSamples));
+ const sceneTarget=new THREE.WebGLRenderTarget(container.clientWidth,container.clientHeight,{type:THREE.HalfFloatType,samples,resolveDepthBuffer:false});
+ composer=new EffectComposer(renderer,sceneTarget);composer.addPass(new RenderPass(scene,camera));
+ bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),.4,.5,1.3);composer.addPass(bloom);
+ if(samples===0)composer.addPass(new SMAAPass(container.clientWidth,container.clientHeight));
+ antialiasing=samples?'MSAA '+samples+'x':'SMAA';
+ composer.addPass(new OutputPass());
+ const anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+ scene.traverse(object=>{const materials=Array.isArray(object.material)?object.material:[object.material];materials.forEach(material=>{if(material?.map)material.map.anisotropy=anisotropy;});});
  const labelContainer=$('world-labels');locations.forEach(loc=>{const button=document.createElement('button');button.className='world-label';button.style.setProperty('--station','#'+loc.color.toString(16).padStart(6,'0'));button.setAttribute('aria-label',t('flyLabel',{place:stationLabel(loc.id)}));button.classList.toggle('brand-label',loc.id==='nexton');button.innerHTML=(loc.id==='nexton'?'<img class="station-logo" src="assets/nexton-logo.svg" alt="" width="111" height="28">':'<span class="label-city">'+stationLabel(loc.id)+'</span>')+'<span class="label-sub">'+t(loc.id+'Sub')+'</span>';button.addEventListener('click',()=>{if(!state.started)start(false);goTo(loc.id);});labelContainer.appendChild(button);labels.set(loc.id,button);});
- const balloon=new THREE.Group();scene.add(balloon);const balloonBody=new THREE.Mesh(new THREE.SphereGeometry(1,16,10),new THREE.MeshStandardMaterial({color:0xe8cbaa,roughness:.8,flatShading:true}));balloonBody.scale.set(1.5,.45,.55);balloon.add(balloonBody);const basket=new THREE.Mesh(new THREE.BoxGeometry(.7,.2,.4),new THREE.MeshStandardMaterial({color:0x5f7372}));basket.position.y=-.6;balloon.add(basket);const fin=new THREE.Mesh(new THREE.BoxGeometry(.4,.6,.06),new THREE.MeshStandardMaterial({color:0xcf9379}));fin.position.set(-1.25,.05,0);balloon.add(fin);
+ const balloon=new THREE.Group();scene.add(balloon);const balloonBody=new THREE.Mesh(new THREE.SphereGeometry(1,32,20),new THREE.MeshStandardMaterial({color:0xe8cbaa,roughness:.8}));balloonBody.scale.set(1.5,.45,.55);balloon.add(balloonBody);const basket=new THREE.Mesh(new THREE.BoxGeometry(.7,.2,.4),new THREE.MeshStandardMaterial({color:0x5f7372}));basket.position.y=-.6;balloon.add(basket);const fin=new THREE.Mesh(new THREE.BoxGeometry(.4,.6,.06),new THREE.MeshStandardMaterial({color:0xcf9379}));fin.position.set(-1.25,.05,0);balloon.add(fin);
  built.balloon=balloon;
  target.copy(mobile()?new THREE.Vector3(0,-7,0):new THREE.Vector3(-9,0,6));targetGoal.copy(target);viewSize=introView();viewGoal=viewSize;
  lastShipPosition.copy(built.ship.position);resize();
@@ -46,7 +61,7 @@ try{
  clock=new THREE.Clock();frame=requestAnimationFrame(animate);
 }catch(error){console.error('3D initialization failed',error);$('fallback').classList.remove('hidden');}
 
-function resize(){if(!renderer)return;const w=container.clientWidth,h=container.clientHeight;renderer.setSize(w,h);composer.setSize(w,h);camera.left=-viewSize*w/h/2;camera.right=viewSize*w/h/2;camera.top=viewSize/2;camera.bottom=-viewSize/2;camera.updateProjectionMatrix();if(!state.started){targetGoal.copy(mobile()?new THREE.Vector3(0,-7,0):new THREE.Vector3(-9,0,6));viewGoal=introView();}else viewGoal=playingView();}
+function resize(){if(!renderer)return;const w=container.clientWidth,h=container.clientHeight,ratio=renderRatio(w,h);renderer.setPixelRatio(ratio);renderer.setSize(w,h);composer.setPixelRatio(ratio);composer.setSize(w,h);bloom.setSize(w*ratio*.65,h*ratio*.65);camera.left=-viewSize*w/h/2;camera.right=viewSize*w/h/2;camera.top=viewSize/2;camera.bottom=-viewSize/2;camera.updateProjectionMatrix();if(!state.started){targetGoal.copy(mobile()?new THREE.Vector3(0,-7,0):new THREE.Vector3(-9,0,6));viewGoal=introView();}else viewGoal=playingView();}
 addEventListener('resize',resize);
 
 function start(fly=true){
@@ -166,7 +181,7 @@ function tone(frequency,duration=.2,volume=.025,delay=0){if(!state.sound||!audio
 $('sound').addEventListener('click',async()=>{state.sound=!state.sound;if(state.sound){audioContext ||= new (window.AudioContext||window.webkitAudioContext)();await audioContext.resume();const notes=[130.81,196,261.63,329.63,392,329.63,261.63,196];let i=0;tone(261.63,.6,.025);musicInterval=setInterval(()=>{if(!document.hidden)tone(notes[i++%notes.length],1.9,.012);},700);}else{clearInterval(musicInterval);if(audioContext)await audioContext.suspend();}$('sound').setAttribute('aria-pressed',String(state.sound));$('sound').setAttribute('aria-label',t(state.sound?'soundOff':'soundOn'));$('sound-status').textContent=state.sound?'ON':'OFF';});
 
 function animate(){
- frame=requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.08);elapsed+=dt;
+ frame=requestAnimationFrame(animate);const rawDelta=clock.getDelta(),dt=Math.min(rawDelta,.08);elapsed+=dt;
  built.update(elapsed,dt,reduced);
  const ship=built.ship;lastShipPosition.copy(ship.position);
  if(state.flight){const f=state.flight;f.time+=dt;const t=Math.min(f.time/f.duration,1),eased=t*t*(3-2*t);ship.position.copy(f.curve.getPoint(eased));if(t>=1){state.flight=null;arrive(f.id);}}
@@ -185,6 +200,7 @@ function animate(){
  built.balloon.position.set(-13+Math.sin(elapsed*.055)*12,10+Math.sin(elapsed*.5)*.15,-27+Math.cos(elapsed*.055)*5);built.balloon.rotation.y=-elapsed*.055;
  if(burst){burst.time+=dt;const a=burst.mesh.geometry.attributes.position;for(let i=0;i<burst.velocities.length;i++){const v=burst.velocities[i];a.array[i*3]+=v.x*dt;a.array[i*3+1]+=v.y*dt;a.array[i*3+2]+=v.z*dt;v.y-=dt*1.8;}a.needsUpdate=true;burst.mesh.material.opacity=Math.max(0,1-burst.time/2.6);if(burst.time>2.7){scene.remove(burst.mesh);burst.mesh.geometry.dispose();burst.mesh.material.dispose();burst=null;}}
  composer.render();
+ if(graphicsDebug&&!graphicsReported&&elapsed>2){graphicsFrames++;graphicsSeconds+=rawDelta;if(graphicsSeconds>=3){graphicsReported=true;console.info('Graphics quality',JSON.stringify({antialiasing,pixelRatio:renderer.getPixelRatio(),width:renderer.domElement.width,height:renderer.domElement.height,fps:Math.round(graphicsFrames/graphicsSeconds),shadowSize:2048,staticDetails:built.graphicsStats}));}}
 }
 function updateClock(){$('ba-time').textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'America/Argentina/Buenos_Aires',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());}updateClock();setInterval(updateClock,30000);
 
