@@ -40,3 +40,14 @@ dialog{position:fixed;margin:auto;max-height:88dvh;overflow:auto;color:var(--ink
 .world-label.connected .label-city{color:var(--mint);text-shadow:0 0 12px #c7fb7b55}
 .mission-host small{text-transform:none;letter-spacing:.02em}
 @media(max-width:600px){.world-label.brand-label .station-logo{width:68px}}
+
+.contact-shortcut{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:8px 13px;color:var(--mint);border:1px solid #c7fb7b80;border-radius:3px;background:#0c2935b3;font-size:11px;font-weight:600;white-space:nowrap;transition:background .2s,border-color .2s}
+.contact-shortcut:hover{background:#254a3b;border-color:var(--mint)}
+.linkedin-mark{font:700 12px Arial,sans-serif;letter-spacing:-.05em;border:1px solid currentColor;border-radius:2px;width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center}
+.intro-start{gap:7px}
+#connect-hero{max-width:100%;gap:20px;min-height:50px;text-align:left;line-height:1.3}
+.explore-link{display:inline-flex;align-items:center;gap:12px;min-height:36px;padding:6px 0;background:transparent;color:#c5d7d8;font-size:12px;text-align:left;transition:color .2s}
+.explore-link:hover{color:var(--mint)}
+.explore-link:disabled{opacity:.5;cursor:wait}
+.contact-shortcut:focus-visible,#connect-hero:focus-visible,.explore-link:focus-visible{outline:2px solid var(--mint);outline-offset:5px}
+@media(max-width:600px){.topbar{gap:12px}.top-actions{gap:7px}.top-actions #profile-open{display:none}.contact-shortcut{gap:6px;min-height:34px;padding:7px 9px;font-size:9px}.linkedin-mark{width:14px;height:14px;font-size:10px}.intro-copy{bottom:9.5%}.intro-start{gap:2px}#connect-hero{min-height:48px;font-size:11px;padding:15px 18px;gap:16px}.explore-link{min-height:40px;font-size:11px}.intro-signature{margin-top:10px}}
