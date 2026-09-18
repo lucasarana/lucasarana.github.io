@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lucas Arana, COO at Nexton</title>
+<meta name="description" content="Lucas Arana is COO at Nexton, a nearshore staffing company that builds and runs remote engineering teams in Latin America for US companies. He writes, with numbers, about hiring senior engineers when AI writes the code: timezone overlap, human vs AI screening, offer structure, and what the nearshore model actually returns.">
+<meta name="author" content="Lucas Arana">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://lucasarana.com/writing/">
+<link rel="me" href="https://www.linkedin.com/in/lucasarana/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Lucas Arana">
+<meta property="og:title" content="Lucas Arana, COO at Nexton">
+<meta property="og:description" content="Nine years running the operation that puts senior LatAm engineers inside US teams. Writing about hiring when AI writes the code, with the numbers attached.">
+<meta property="og:url" content="https://lucasarana.com/writing/">
+<meta property="og:image" content="https://lucasarana.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lucas Arana, COO at Nexton. Buenos Aires.">
+<meta property="og:locale" content="en_US">
+<meta property="profile:first_name" content="Lucas">
+<meta property="profile:last_name" content="Arana">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lucas Arana, COO at Nexton">
+<meta name="twitter:description" content="Nine years running the operation that puts senior LatAm engineers inside US teams. Writing about hiring when AI writes the code, with the numbers attached.">
+<meta name="twitter:image" content="https://lucasarana.com/og.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://lucasarana.com/#person",
+      "name": "Lucas Arana",
+      "givenName": "Lucas",
+      "familyName": "Arana",
+      "jobTitle": "Chief Operating Officer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Nexton",
+        "url": "https://nexton.dev",
+        "description": "A nearshore staffing company that builds and runs remote engineering teams in Latin America for companies in the United States. Engineers vetted by engineers."
+      },
+      "url": "https://lucasarana.com/",
+      "image": "https://lucasarana.com/lucas.jpg",
+      "email": "mailto:lucas@lucasarana.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Buenos Aires", "addressCountry": "AR" },
+      "sameAs": [ "https://www.linkedin.com/in/lucasarana/" ],
+      "knowsLanguage": [ "en", "es" ],
+      "knowsAbout": [
+        "Nearshore staffing",
+        "Remote engineering teams in Latin America",
+        "Technical hiring operations",
+        "AI-assisted candidate screening",
+        "Timezone overlap for distributed engineering teams",
+        "Compensation positioning for remote engineers",
+        "Revenue operations",
+        "AI agents in business operations"
+      ],
+      "description": "Lucas Arana is Chief Operating Officer at Nexton, a staffing company that builds remote engineering teams in Latin America for companies in the United States. Nexton's engineers work embedded full-time in their client's teams under Nexton contracts, with Nexton handling payroll, contracts and talent health, so the model is closer to running a distributed workforce than to filling a vacancy and walking away. Arana joined Nexton in 2019 and leads operations, talent strategy and executive planning, and also runs the revenue operations function covering process, tooling and pipeline. He treats hiring as an operations problem measured end to end: fill rates, offer acceptance, time to hire, attrition and compensation positioning. He writes about the LatAm-to-US talent corridor, how US companies structure offers for senior remote engineers, and what the nearshore model actually costs and returns. He is based in Buenos Aires."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://lucasarana.com/#website",
+      "url": "https://lucasarana.com/",
+      "name": "Lucas Arana",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://lucasarana.com/#person" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://lucasarana.com/#profilepage",
+      "url": "https://lucasarana.com/",
+      "name": "Lucas Arana, COO at Nexton",
+      "mainEntity": { "@id": "https://lucasarana.com/#person" },
+      "isPartOf": { "@id": "https://lucasarana.com/#website" },
+      "dateModified": "2026-09-17"
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --paper:#FFFFFF; --paper-2:#F6F7F9; --ink:#0E1116; --ink-2:#3C4452; --muted:#6B7280;
+    --line:#E6E8EC; --line-2:#CFD4DC;
+    --accent:#1F3DFF; --accent-hover:#1631D6; --accent-ink:#FFFFFF; --tint:#EEF1FF; --tint-line:#C9D2FF;
+    --sun:#F2B135;
+    --shadow:0 1px 2px rgba(14,17,22,.05), 0 16px 40px -28px rgba(14,17,22,.35);
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0E1116; --paper-2:#141922; --ink:#F4F6F8; --ink-2:#C3CAD4; --muted:#8A94A3;
+      --line:#222834; --line-2:#2F3745;
+      --accent:#7C8FFF; --accent-hover:#96A5FF; --accent-ink:#0E1116; --tint:#161D36; --tint-line:#2A3568;
+      --sun:#F2B135;
+      --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 16px 40px -28px rgba(0,0,0,.9);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E1116; --paper-2:#141922; --ink:#F4F6F8; --ink-2:#C3CAD4; --muted:#8A94A3;
+    --line:#222834; --line-2:#2F3745;
+    --accent:#7C8FFF; --accent-hover:#96A5FF; --accent-ink:#0E1116; --tint:#161D36; --tint-line:#2A3568;
+    --sun:#F2B135;
+    --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 16px 40px -28px rgba(0,0,0,.9);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:80px}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none !important; animation:none !important} }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Public Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+  .wrap{width:min(1120px, 100% - 40px); margin-inline:auto}
+  @media (max-width:520px){ .wrap{width:min(1120px, 100% - 32px)} }
+  .display{font-family:'Schibsted Grotesk', 'Public Sans', system-ui, sans-serif; letter-spacing:-0.025em}
+  .mono{font-family:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+  .eyebrow{font-family:'JetBrains Mono', ui-monospace, monospace; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+  .num{font-family:'JetBrains Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums}
+
+  /* Nav */
+  .top{position:sticky; top:env(safe-area-inset-top, 0px); z-index:20; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; height:64px}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700; font-family:'Schibsted Grotesk', sans-serif; letter-spacing:-.01em}
+  .brand .mark{width:28px; height:28px; border-radius:8px; background:var(--ink); color:var(--paper); display:grid; place-items:center; font:700 12px/1 'JetBrains Mono', monospace}
+  .nav{display:flex; align-items:center; gap:4px}
+  .nav a{font-size:.95rem; color:var(--ink-2); text-decoration:none; padding:8px 12px; border-radius:8px}
+  .nav a:hover{color:var(--ink); background:var(--paper-2)}
+  .btn{display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-weight:600; font-size:.98rem; padding:12px 18px; border-radius:10px; border:1px solid var(--line-2); color:var(--ink); background:var(--paper); cursor:pointer; font-family:inherit; transition:transform .15s ease, border-color .15s ease, background .15s ease}
+  .btn:hover{transform:translateY(-1px); border-color:var(--ink)}
+  .btn.primary{background:var(--accent); color:var(--accent-ink); border-color:transparent}
+  .btn.primary:hover{background:var(--accent-hover)}
+  .btn .arrow{font-family:'JetBrains Mono', monospace}
+  .nav .btn{padding:9px 14px; font-size:.92rem; margin-left:6px}
+  @media (max-width:720px){ .nav .hide-sm{display:none} }
+
+  /* Hero */
+  .hero{padding-block:clamp(48px, 7vw, 96px) clamp(36px, 5vw, 64px)}
+  .hero .grid{display:grid; grid-template-columns:1fr; gap:36px; align-items:center}
+  @media (min-width:900px){ .hero .grid{grid-template-columns:minmax(0, 1.25fr) minmax(0, .85fr); gap:56px} }
+  h1{margin:18px 0 0; font-weight:800; font-size:clamp(2.4rem, 5.6vw, 4.4rem); line-height:1.0; max-width:18ch; text-wrap:balance}
+  h1 .acc{color:var(--accent)}
+  .lede{font-size:clamp(1.08rem, 1.5vw, 1.28rem); line-height:1.5; color:var(--ink-2); max-width:56ch; margin:24px 0 0}
+  .lede strong{color:var(--ink); font-weight:600}
+  .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:30px}
+  .photo{position:relative; border-radius:18px; overflow:hidden; background:var(--paper-2); border:1px solid var(--line); aspect-ratio:4/5; max-width:420px; margin-inline:auto; width:100%}
+  .photo img{width:100%; height:100%; object-fit:cover; display:block}
+  .photo .badge{position:absolute; left:14px; right:14px; bottom:14px; background:color-mix(in srgb, var(--paper) 92%, transparent); border:1px solid var(--line); border-radius:12px; padding:10px 12px; display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--ink-2); backdrop-filter:blur(8px)}
+  .photo .badge .dot{width:8px; height:8px; border-radius:50%; background:var(--sun); box-shadow:0 0 0 4px color-mix(in srgb, var(--sun) 25%, transparent); flex-shrink:0}
+  .photo .badge b{color:var(--ink); font-weight:600}
+  .photo.nophoto{aspect-ratio:auto; border:0; background:transparent}
+  .photo.nophoto img{display:none}
+  .photo.nophoto .badge{position:static; margin-top:0}
+  @media (min-width:900px){ .hero .grid:has(.nophoto){grid-template-columns:1fr} .hero .grid:has(.nophoto) .photo{max-width:none; margin:0} .hero .grid:has(.nophoto) .badge{display:inline-flex; width:auto} }
+
+  /* Proof strip */
+  .proof{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--paper-2)}
+  .proof .wrap{display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:0}
+  @media (max-width:980px){ .proof .wrap{grid-template-columns:repeat(3, minmax(0,1fr))} }
+  @media (max-width:560px){ .proof .wrap{grid-template-columns:repeat(2, minmax(0,1fr))} }
+  .stat{padding:22px 18px 20px; border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  @media (max-width:980px){ .stat:nth-child(3n){border-right:0} .stat{border-bottom:1px solid var(--line)} .stat:nth-last-child(-n+3){border-bottom:0} }
+  @media (max-width:560px){ .stat:nth-child(3n){border-right:1px solid var(--line)} .stat:nth-child(2n){border-right:0} .stat:nth-last-child(-n+3){border-bottom:1px solid var(--line)} .stat:nth-last-child(-n+2){border-bottom:0} }
+  .stat .v{font-family:'Schibsted Grotesk', sans-serif; font-weight:800; font-size:clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing:-.03em; line-height:1}
+  .stat .k{margin-top:6px; font-size:.86rem; color:var(--muted); line-height:1.3}
+  .proof-src{font-size:.78rem; color:var(--muted); padding:10px 0 12px}
+  .proof-src a{color:var(--muted)}
+
+  /* Sections */
+  section{padding-block:clamp(48px, 6vw, 88px)}
+  section + section{border-top:1px solid var(--line)}
+  .sec-head{display:grid; grid-template-columns:1fr; gap:10px; margin-bottom:30px}
+  @media (min-width:860px){ .sec-head{grid-template-columns:minmax(0, 1fr) minmax(0, 1.1fr); align-items:end; gap:32px} }
+  h2{margin:0; font-weight:800; font-size:clamp(1.7rem, 3.2vw, 2.5rem); line-height:1.05; text-wrap:balance}
+  .sec-sub{margin:0; color:var(--muted); font-size:1rem; max-width:58ch}
+
+  /* Writing */
+  .posts{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px}
+  @media (max-width:980px){ .posts{grid-template-columns:repeat(2, minmax(0,1fr))} }
+  @media (max-width:620px){ .posts{grid-template-columns:1fr} }
+  .post{display:flex; flex-direction:column; gap:14px; padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--paper); text-decoration:none; color:var(--ink); box-shadow:var(--shadow); transition:border-color .15s ease, transform .15s ease; min-width:0}
+  .post:hover{border-color:var(--ink); transform:translateY(-2px)}
+  .post .big{font-family:'Schibsted Grotesk', sans-serif; font-weight:800; font-size:clamp(1.9rem, 2.6vw, 2.4rem); letter-spacing:-.035em; line-height:1; color:var(--accent)}
+  .post .big small{font-size:.5em; letter-spacing:0; font-weight:700; color:var(--ink); margin-left:6px; font-family:'Public Sans', sans-serif}
+  .post h3{margin:0; font-weight:700; font-size:1.12rem; line-height:1.3; text-wrap:balance; font-family:'Schibsted Grotesk', sans-serif; letter-spacing:-.01em}
+  .post p{margin:0; color:var(--ink-2); font-size:.95rem; line-height:1.5}
+  .post .meta{margin-top:auto; display:flex; justify-content:space-between; align-items:center; font-family:'JetBrains Mono', monospace; font-size:.74rem; letter-spacing:.04em; color:var(--muted); padding-top:8px}
+  .post .meta .go{color:var(--accent); font-weight:600}
+  .post.feature{grid-column:1 / -1}
+  .post.feature .inner{display:grid; grid-template-columns:1fr; gap:18px}
+  @media (min-width:760px){ .post.feature .inner{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:40px; align-items:start} }
+
+  /* clocks (compact) */
+  .clocks{display:grid; gap:10px}
+  .clock{display:grid; grid-template-columns:110px 1fr auto; gap:12px; align-items:center; font-size:.85rem}
+  @media (max-width:420px){ .clock{grid-template-columns:90px 1fr auto} }
+  .clock .city{font-weight:600; display:flex; align-items:center; gap:8px; white-space:nowrap}
+  .clock .city::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--accent)}
+  .clock.ba .city::before{background:var(--sun)}
+  .track{position:relative; height:22px; border-radius:6px; background:var(--paper-2); border:1px solid var(--line); overflow:hidden}
+  .track .band{position:absolute; top:4px; bottom:4px; border-radius:4px}
+  .track .band.work{background:color-mix(in srgb, var(--accent) 14%, transparent); border:1px solid color-mix(in srgb, var(--accent) 35%, transparent)}
+  .clock.ba .track .band.work{background:color-mix(in srgb, var(--sun) 22%, transparent); border-color:color-mix(in srgb, var(--sun) 55%, transparent)}
+  .track .band.overlap{background:color-mix(in srgb, var(--accent) 45%, var(--sun) 35%); top:3px; bottom:3px; border:0}
+  .track .now{position:absolute; top:0; bottom:0; width:2px; background:var(--ink)}
+  .clock .hm{font-family:'JetBrains Mono', monospace; font-variant-numeric:tabular-nums; font-weight:600; min-width:5ch; text-align:right}
+  .ovl{font-size:.85rem; color:var(--ink-2); margin-top:8px}
+  .ovl b{color:var(--ink)}
+
+  /* Now */
+  .now{display:grid; grid-template-columns:1fr; gap:0}
+  .now-item{display:grid; grid-template-columns:140px 1fr; gap:20px; padding:20px 0; border-top:1px solid var(--line)}
+  .now-item:last-child{border-bottom:1px solid var(--line)}
+  @media (max-width:640px){ .now-item{grid-template-columns:1fr; gap:6px} }
+  .now-item .k{font-family:'JetBrains Mono', monospace; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding-top:4px}
+  .now-item h3{margin:0 0 4px; font-family:'Schibsted Grotesk', sans-serif; font-weight:700; font-size:1.15rem; letter-spacing:-.01em}
+  .now-item p{margin:0; color:var(--ink-2); max-width:62ch}
+  .now-item a{color:var(--ink); text-decoration:underline; text-decoration-color:var(--line-2); text-underline-offset:3px}
+  .now-item a:hover{text-decoration-color:var(--accent)}
+
+  /* Positions */
+  .positions{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0 48px}
+  @media (max-width:860px){ .positions{grid-template-columns:1fr} }
+  .pos{padding:22px 0; border-top:1px solid var(--line)}
+  .pos h3{margin:0 0 6px; font-family:'Schibsted Grotesk', sans-serif; font-weight:800; font-size:clamp(1.3rem, 2vw, 1.6rem); line-height:1.12; letter-spacing:-.02em; text-wrap:balance}
+  .pos p{margin:0; color:var(--ink-2); max-width:52ch}
+
+  /* Contact */
+  .contact{background:var(--paper-2); border-top:1px solid var(--line)}
+  .contact .grid{display:grid; grid-template-columns:1fr; gap:32px}
+  @media (min-width:900px){ .contact .grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:56px} }
+  .contact p.lead{color:var(--ink-2); font-size:1.05rem; max-width:48ch; margin:14px 0 0}
+  .alt{margin-top:26px; display:grid; gap:10px; font-size:.95rem}
+  .alt a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line-2)}
+  .alt a:hover{border-color:var(--accent)}
+  .alt .k{font-family:'JetBrains Mono', monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); display:inline-block; width:88px}
+  form.card{background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:24px; box-shadow:var(--shadow); display:grid; gap:14px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{font:inherit; font-size:.86rem; padding:8px 12px; border-radius:999px; border:1px solid var(--line-2); background:var(--paper); color:var(--ink-2); cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--tint); border-color:var(--accent); color:var(--ink)}
+  .field{display:grid; gap:6px}
+  .field label{font-size:.86rem; font-weight:600; color:var(--ink-2)}
+  .field input, .field textarea{font:inherit; font-size:1rem; padding:12px 14px; border-radius:10px; border:1px solid var(--line-2); background:var(--paper); color:var(--ink); width:100%}
+  .field input::placeholder, .field textarea::placeholder{color:var(--muted)}
+  .field textarea{min-height:120px; resize:vertical}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media (max-width:520px){ .row2{grid-template-columns:1fr} }
+  .form-foot{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+  .form-foot small{color:var(--muted); font-size:.82rem}
+  .status{font-size:.92rem; color:var(--ink-2)}
+  .status.ok{color:var(--ink); font-weight:600}
+  .status.err{color:#B42318}
+  .hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+
+  /* Newsletter */
+  .news{display:grid; grid-template-columns:1fr; gap:22px; align-items:center}
+  @media (min-width:860px){ .news{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:56px} }
+  .news .tag{display:inline-block; vertical-align:middle; margin-left:10px; font-family:'JetBrains Mono', monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); border:1px solid var(--tint-line); background:var(--tint); padding:4px 8px; border-radius:999px}
+  .news p{margin:14px 0 0; color:var(--ink-2); max-width:54ch}
+  form.inline{display:flex; gap:10px; flex-wrap:wrap}
+  form.inline input{flex:1 1 220px; font:inherit; font-size:1rem; padding:12px 14px; border-radius:10px; border:1px solid var(--line-2); background:var(--paper); color:var(--ink)}
+  .news .status{margin-top:10px}
+
+  /* About + footer */
+  .about{display:grid; grid-template-columns:1fr; gap:18px}
+  @media (min-width:860px){ .about{grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr); gap:56px} }
+  .about p{margin:0; color:var(--ink-2); font-size:1.04rem; max-width:66ch}
+  .facts{display:grid; gap:10px; margin-top:8px}
+  .fact{display:grid; grid-template-columns:110px 1fr; gap:12px; font-size:.95rem; border-top:1px solid var(--line); padding-top:10px}
+  .fact .k{font-family:'JetBrains Mono', monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding-top:3px}
+  .fact a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line-2)}
+  .foot{border-top:1px solid var(--line); padding-block:28px 40px; color:var(--muted); font-size:.9rem}
+  .foot .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:center}
+  .foot nav{display:flex; gap:16px; flex-wrap:wrap}
+  .foot a{color:var(--ink-2); text-decoration:none}
+  .foot a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Lucas Arana, home"><span class="mark">LA</span><span>Lucas Arana</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a class="hide-sm" href="#writing">Writing</a>
+      <a class="hide-sm" href="#now">Now</a>
+      <a class="hide-sm" href="https://www.linkedin.com/in/lucasarana/" rel="me noopener" target="_blank">LinkedIn</a>
+      <a class="btn primary" href="#contact">Start a conversation <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="wrap grid">
+      <div>
+        <p class="eyebrow">COO &amp; Software Engineer at Nexton · Buenos Aires</p>
+        <h1 class="display">Hiring is an operations problem. <span class="acc">I run the operation, and I publish the scoreboard.</span></h1>
+        <p class="lede">Nine years building remote engineering teams in Latin America for US companies. I write about what actually works when <strong>AI writes the code and a human still has to catch it</strong>: who to hire, where they sit, and how you know it worked.</p>
+        <div class="cta">
+          <a class="btn primary" href="#contact">Start a conversation <span class="arrow">→</span></a>
+          <a class="btn" href="#writing">Read the posts <span class="arrow">↓</span></a>
+        </div>
+      </div>
+      <figure class="photo" id="photo">
+        <img src="/lucas.jpg" alt="Lucas Arana" width="840" height="1050" onerror="document.getElementById('photo').classList.add('nophoto')">
+        <figcaption class="badge"><span class="dot" aria-hidden="true"></span><span>Buenos Aires, <b class="num" id="ba-now">--:--</b>. <span id="ba-ovl">Working the same day as New York.</span></span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="proof" aria-label="The operation in numbers">
+    <div class="wrap">
+      <div class="stat"><div class="v num">1,500</div><div class="k">engineers placed in US teams</div></div>
+      <div class="stat"><div class="v num">350+</div><div class="k">companies hiring through Nexton</div></div>
+      <div class="stat"><div class="v num">9 yrs</div><div class="k">betting on Latin America</div></div>
+      <div class="stat"><div class="v num">72 h</div><div class="k">to meet senior candidates</div></div>
+      <div class="stat"><div class="v num">4 wks</div><div class="k">average time to hire</div></div>
+      <div class="stat"><div class="v num">4.9</div><div class="k">Clutch rating</div></div>
+    </div>
+    <div class="wrap proof-src">Public figures, from <a href="https://nexton.dev" rel="noopener" target="_blank">nexton.dev</a>. I run the operation behind them.</div>
+  </div>
+
+  <section id="writing" aria-labelledby="writing-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="display" id="writing-h">Recent posts, with the numbers attached.</h2>
+        <p class="sec-sub">I post on LinkedIn a few times a month. Data from the operation, no theory. These are the ones people argued with.</p>
+      </div>
+      <div class="posts">
+        <a class="post feature" href="https://www.linkedin.com/feed/update/urn:li:activity:7505596526220652545/" target="_blank" rel="noopener">
+          <div class="inner">
+            <div>
+              <div class="big num">42%<small>disagreement</small></div>
+              <h3>We graded every candidate's English twice for a year. Once by a human, once by AI. The humans won.</h3>
+            </div>
+            <div>
+              <p>About 300 submissions where the two graders split, all with client outcomes attached. Candidates the AI marked down from C1 to B2 passed client interviews at 16.4%, in line with the 17.6% of human-graded C1s, and more than double the 7.8% of genuine B2s. If you let a model reject someone and drop them, the error never becomes data. We can tell you who is winning. Your vendor can only tell you their model is confident.</p>
+            </div>
+          </div>
+          <div class="meta"><span>LinkedIn · Sep 2026</span><span class="go">Read the post ↗</span></div>
+        </a>
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7480676003468546048/" target="_blank" rel="noopener">
+          <div class="big num">-20% / +12%</div>
+          <h3>Entry-level tech hiring is down. Senior hiring is up. Same year, same AI.</h3>
+          <p>AI did not remove the work. It removed the bottom rung. Demand for people who can own a system and catch the agent when it is confidently wrong went up. Nine years in, our retention is not an HR metric. It is the product.</p>
+          <div class="meta"><span>41 comments</span><span class="go">Read ↗</span></div>
+        </a>
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7478081896875388928/" target="_blank" rel="noopener">
+          <div class="big num" id="ovl-big">8 h<small>shared with NYC today</small></div>
+          <h3>The more of your code AI writes, the more it matters what timezone your engineers sit in.</h3>
+          <div class="clocks" aria-label="Live clocks">
+            <div class="clock ba" data-tz="America/Argentina/Buenos_Aires"><span class="city">Buenos Aires</span><div class="track" aria-hidden="true"><div class="band work" data-work></div><div class="now" data-now></div></div><span class="hm">--:--</span></div>
+            <div class="clock" data-tz="America/New_York"><span class="city">New York</span><div class="track" aria-hidden="true"><div class="band work" data-work></div><div class="band overlap" data-overlap></div><div class="now" data-now></div></div><span class="hm">--:--</span></div>
+            <div class="clock" data-tz="America/Los_Angeles"><span class="city">San Francisco</span><div class="track" aria-hidden="true"><div class="band work" data-work></div><div class="band overlap" data-overlap></div><div class="now" data-now></div></div><span class="hm">--:--</span></div>
+          </div>
+          <p class="ovl" id="ovl-text">Working hours 9:00 to 18:00 in each city. The reviewer has to be awake while the agent is running.</p>
+          <div class="meta"><span>Live, from this page</span><span class="go">Read ↗</span></div>
+        </a>
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7498786423743987712/" target="_blank" rel="noopener">
+          <div class="big">"Fluent in AI tools"</div>
+          <h3>It is on every vendor's homepage. It means nothing.</h3>
+          <p>When every working developer uses these tools daily, "uses AI" is not a qualification. The one question worth asking about any AI certification, ours included: does it check whether the engineer can tell when the model is wrong?</p>
+          <div class="meta"><span>LinkedIn</span><span class="go">Read ↗</span></div>
+        </a>
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7455667543521837056/" target="_blank" rel="noopener">
+          <div class="big num">~10%</div>
+          <h3>Only about one in ten companies has scaled AI agents into production. It is almost never a technology problem.</h3>
+          <p>No clear owner. No success metric. No governance. No integration budget. The companies that crossed had a named owner, a measurable goal, and a small, ugly first deployment.</p>
+          <div class="meta"><span>LinkedIn</span><span class="go">Read ↗</span></div>
+        </a>
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7487869543881752577/" target="_blank" rel="noopener">
+          <div class="big">Thursdays, 1 h</div>
+          <h3>The whole Nexton management team shows what they actually built with AI this week. Live, on screen, running.</h3>
+          <p>Not a rehearsed demo. The thing you shipped. We trained the basics, then made it slightly embarrassing to show up empty-handed. Past a point, upskilling is a peer-pressure problem.</p>
+          <div class="meta"><span>LinkedIn</span><span class="go">Read ↗</span></div>
+        </a>
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7448108177033981952/" target="_blank" rel="noopener">
+          <div class="big num">10+<small>unicorns</small></div>
+          <h3>Argentina has a habit of building world-class tech under pressure.</h3>
+          <p>Mercado Libre, Auth0, Vercel, Ualá, Globant. Built by people who learned to think globally from day one because waiting for the perfect local market was never an option. When the environment is unpredictable, you build things that work anyway.</p>
+          <div class="meta"><span>LinkedIn</span><span class="go">Read ↗</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="now" aria-labelledby="now-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="display" id="now-h">What I'm doing right now.</h2>
+        <p class="sec-sub">Updated September 2026. If any of this is your problem too, that is a good reason to write.</p>
+      </div>
+      <div class="now">
+        <div class="now-item"><div class="k">Measuring</div><div><h3>Re-running the human vs AI grading cohort</h3><p>After the latest model updates the AI now grades higher rather than lower. We re-measure the whole cohort against client outcomes at the end of October, and publish what we find either way.</p></div></div>
+        <div class="now-item"><div class="k">Operating</div><div><h3>Running Nexton's operation, talent strategy and revenue operations</h3><p>Fill rate, offer acceptance, time to hire, attrition and compensation positioning, read together every week. Engineers vetting engineers, with AI doing the first pass and humans keeping score on it.</p></div></div>
+        <div class="now-item"><div class="k">Convening</div><div><h3>Hosting AI Builders LATAM in Buenos Aires</h3><p>Small dinners of operators who ship with AI inside their companies, across industries that rarely meet. One rule: what did you build and what broke. If you are in Buenos Aires and building rather than posting, <a href="#contact">there is a seat at the next table</a>.</p></div></div>
+        <div class="now-item"><div class="k">Learning</div><div><h3>Second year in a YPO Key Associate Forum</h3><p>Eight senior operators from eight companies, once a month, no agenda. The people who tell me when I am wrong before the market does.</p></div></div>
+        <div class="now-item"><div class="k">Writing</div><div><h3>Southbound, a newsletter on the LatAm to US talent corridor</h3><p>Launching soon. Offers, overlap, attrition, and what the nearshore model actually returns. <a href="#newsletter">Leave your email below</a> and you get the first issue.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="thinking" aria-labelledby="pos-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="display" id="pos-h">Four things I keep being right about. So far.</h2>
+        <p class="sec-sub">Positions, not predictions. Each one has cost us something to hold, and each one is on the scoreboard.</p>
+      </div>
+      <div class="positions">
+        <div class="pos"><h3 class="display">Overlap stopped being a nice-to-have.</h3><p>Agents write the first draft of everything. The human job moved to reviewing live and catching the model before the mistake compounds. That is real-time work, and you cannot do it at 3am. Nine years ago we bet the company on a region that shares the US working day. We did not see the AI part coming. The bet paid anyway.</p></div>
+        <div class="pos"><h3 class="display">Validation is the moat, not access.</h3><p>AI is commoditizing access to talent. What it cannot commoditize is a decade of knowing which candidate turned out to be right for which role. Engineers vetting engineers, with outcomes attached, beats a confident model with a clean accuracy report.</p></div>
+        <div class="pos"><h3 class="display">If it is not measured end to end, it is not managed.</h3><p>Fill rate, offer acceptance, time to hire, attrition and compensation positioning, read together. Any one of them alone will lie to you, and a vendor who shows you one of them is choosing which one.</p></div>
+        <div class="pos"><h3 class="display">A nearshore team is a workforce you run, not a vacancy you fill.</h3><p>Payroll, contracts, talent health and performance stay on the table long after day one. Most of the model's value lives there. So do most of its failures.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="newsletter" aria-labelledby="news-h">
+    <div class="wrap news">
+      <div>
+        <h2 class="display" id="news-h">Southbound <span class="tag">Newsletter · first issue soon</span></h2>
+        <p>One email when something in the operation is worth reporting: a number that moved, an experiment that finished, a take that survived contact with clients. No cadence promises, no filler.</p>
+      </div>
+      <div>
+        <form class="inline" id="newsform" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Southbound: new subscriber">
+          <input type="hidden" name="type" value="newsletter">
+          <label class="hp" aria-hidden="true">Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          <input type="email" name="email" id="news-email" placeholder="you@company.com" required aria-label="Email address" autocomplete="email">
+          <button class="btn primary" type="submit">Save me a seat <span class="arrow">→</span></button>
+        </form>
+        <p class="status" id="news-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap grid">
+      <div>
+        <p class="eyebrow">Start a conversation</p>
+        <h2 class="display" id="contact-h" style="margin-top:12px">Tell me what you are trying to decide.</h2>
+        <p class="lead">A team in Latin America, an offer for a senior engineer in Buenos Aires or São Paulo, a vendor you cannot see through, a model you are comparing. I read these myself and answer from Buenos Aires, usually within a working day.</p>
+        <div class="alt">
+          <div><span class="k">Email</span><a href="mailto:lucas@lucasarana.com">lucas@lucasarana.com</a></div>
+          <div><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/lucasarana/" rel="me noopener" target="_blank">linkedin.com/in/lucasarana</a></div>
+          <div><span class="k">Company</span><a href="https://nexton.dev" rel="noopener" target="_blank">nexton.dev</a></div>
+        </div>
+      </div>
+      <form class="card" id="contactform" method="POST" novalidate>
+        <input type="hidden" name="_subject" id="cf-subject" value="lucasarana.com: new conversation">
+        <input type="hidden" name="topic" id="cf-topic" value="">
+        <input type="hidden" name="type" value="contact">
+        <label class="hp" aria-hidden="true">Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        <div class="field">
+          <label>What is this about?</label>
+          <div class="chips" role="group" aria-label="Topic">
+            <button type="button" class="chip" data-topic="Building a team in LatAm" aria-pressed="false">Building a team in LatAm</button>
+            <button type="button" class="chip" data-topic="Structuring an offer" aria-pressed="false">Structuring an offer</button>
+            <button type="button" class="chip" data-topic="My vendor / talent health" aria-pressed="false">My current vendor</button>
+            <button type="button" class="chip" data-topic="Comparing models (staffing, contractors, EOR, entity)" aria-pressed="false">Comparing models</button>
+            <button type="button" class="chip" data-topic="AI Builders LATAM dinner" aria-pressed="false">AI Builders dinner</button>
+            <button type="button" class="chip" data-topic="Comparing notes / press" aria-pressed="false">Comparing notes</button>
+            <button type="button" class="chip" data-topic="Something else" aria-pressed="false">Something else</button>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" required autocomplete="name" placeholder="Your name"></div>
+          <div class="field"><label for="cf-email">Work email</label><input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com"></div>
+        </div>
+        <div class="field"><label for="cf-company">Company and role <span style="color:var(--muted);font-weight:400">(optional)</span></label><input id="cf-company" name="company" type="text" autocomplete="organization" placeholder="Acme, VP Engineering"></div>
+        <div class="field"><label for="cf-msg">What are you trying to decide?</label><textarea id="cf-msg" name="message" required placeholder="Two or three lines is plenty. Numbers welcome."></textarea></div>
+        <div class="form-foot">
+          <button class="btn primary" type="submit" id="cf-submit">Send <span class="arrow">→</span></button>
+          <small>Goes straight to my inbox. No list, no sequence.</small>
+        </div>
+        <p class="status" id="cf-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="wrap about">
+      <div>
+        <h2 class="display" id="about-h">About.</h2>
+        <div class="facts">
+          <div class="fact"><span class="k">Role</span><span>Chief Operating Officer, <a href="https://nexton.dev" rel="noopener" target="_blank">Nexton</a></span></div>
+          <div class="fact"><span class="k">Base</span><span>Buenos Aires, Argentina · GMT-3</span></div>
+          <div class="fact"><span class="k">Languages</span><span>English, Spanish</span></div>
+          <div class="fact"><span class="k">Email</span><span><a href="mailto:lucas@lucasarana.com">lucas@lucasarana.com</a></span></div>
+          <div class="fact"><span class="k">LinkedIn</span><span><a href="https://www.linkedin.com/in/lucasarana/" rel="me noopener" target="_blank">linkedin.com/in/lucasarana</a></span></div>
+        </div>
+      </div>
+      <div>
+        <p>Lucas Arana is Chief Operating Officer at Nexton, a staffing company that builds remote engineering teams in Latin America for companies in the United States. Nexton's engineers work embedded full-time in their client's teams under Nexton contracts, with Nexton handling payroll, contracts and talent health, so the model is closer to running a distributed workforce than to filling a vacancy and walking away. Arana joined Nexton in 2019 and leads operations, talent strategy and executive planning, and also runs the revenue operations function covering process, tooling and pipeline. He treats hiring as an operations problem measured end to end: fill rates, offer acceptance, time to hire, attrition and compensation positioning. He writes about the LatAm-to-US talent corridor, how US companies structure offers for senior remote engineers, and what the nearshore model actually costs and returns. He is based in Buenos Aires.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Lucas Arana · COO at Nexton · Buenos Aires</span>
+    <nav aria-label="Footer">
+      <a href="mailto:lucas@lucasarana.com">Email</a>
+      <a href="https://www.linkedin.com/in/lucasarana/" rel="me noopener" target="_blank">LinkedIn</a>
+      <a href="https://nexton.dev" rel="noopener" target="_blank">nexton.dev</a>
+      <a class="mono" style="font-size:.78rem" href="/llms.txt">For AI agents: llms.txt</a>
+    </nav>
+    <span class="mono" style="font-size:.78rem">© 2026 Lucas Arana</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- config: HubSpot Forms (Nexton portal), no third-party form service ---------- */
+  var HS_PORTAL = '14573977';
+  var HS_FORM_CONTACT = 'cecd6c65-4ec2-4d88-a863-6c22eb6ce79f';    /* guid of the "lucasarana.com > Contact" form */
+  var HS_FORM_NEWSLETTER = '5f3b9fba-465d-4d12-b55a-74efa9cd57dc'; /* guid of the "lucasarana.com > Southbound" form */
+  var TO = 'lucas@lucasarana.com';
+
+  /* ---------- clocks ---------- */
+  var WS = 9*60, WE = 18*60, BA = 'America/Argentina/Buenos_Aires';
+  function parts(d, tz){ var f = new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}); var o={}; f.formatToParts(d).forEach(function(p){o[p.type]=p.value;}); return {y:+o.year,mo:+o.month,d:+o.day,h:+o.hour,mi:+o.minute,s:+o.second}; }
+  function off(d, tz){ var p=parts(d,tz); return Math.round((Date.UTC(p.y,p.mo-1,p.d,p.h,p.mi,p.s)-d.getTime())/60000); }
+  function pad(n){ return (n<10?'0':'')+n; }
+  function pct(m){ return (Math.max(0,Math.min(1440,m))/1440*100).toFixed(2)+'%'; }
+  function band(el,s,e){ if(!el) return; if(e<=s){el.style.display='none';return;} el.style.display=''; el.style.left=pct(s); el.style.width=((Math.min(1440,e)-Math.max(0,s))/1440*100).toFixed(2)+'%'; }
+  function hhmm(m){ m=((m%1440)+1440)%1440; return pad(Math.floor(m/60))+':'+pad(m%60); }
+  var clocks = Array.prototype.slice.call(document.querySelectorAll('.clock'));
+  var last=-1;
+  function tick(){
+    var now=new Date(); if(now.getSeconds()===last) return; last=now.getSeconds();
+    var offBA=off(now,BA), pBA=parts(now,BA);
+    var baS=WS-offBA, baE=WE-offBA;
+    var el=document.getElementById('ba-now'); if(el) el.textContent=pad(pBA.h)+':'+pad(pBA.mi);
+    var nyHours=null, nyS=0, nyE=0;
+    clocks.forEach(function(c){
+      var tz=c.getAttribute('data-tz'), p=parts(now,tz), o=off(now,tz);
+      c.querySelector('.hm').textContent=pad(p.h)+':'+pad(p.mi);
+      c.querySelector('[data-now]').style.left=pct(p.h*60+p.mi+p.s/60);
+      band(c.querySelector('[data-work]'),WS,WE);
+      var ov=c.querySelector('[data-overlap]');
+      if(ov){ var s=Math.max(WS,baS+o), e=Math.min(WE,baE+o); band(ov,s,e); if(tz==='America/New_York'){ nyHours=Math.max(0,(e-s)/60); nyS=s; nyE=e; } }
+    });
+    if(nyHours!=null){
+      var h=Math.round(nyHours*10)/10, hs=(h%1===0?h.toFixed(0):h.toFixed(1));
+      var big=document.getElementById('ovl-big'); if(big) big.innerHTML=hs+' h<small>shared with NYC today</small>';
+      var t=document.getElementById('ovl-text'); if(t) t.innerHTML='Working hours 9:00 to 18:00 in each city. Today Buenos Aires shares <b>'+hs+' hours</b> with New York ('+hhmm(nyS)+' to '+hhmm(nyE)+' ET). The reviewer has to be awake while the agent is running.';
+      var b=document.getElementById('ba-ovl'); if(b) b.textContent=hs+' hours of shared working day with New York today.';
+    }
+  }
+  tick(); setInterval(tick,250);
+
+  /* ---------- forms ---------- */
+  var topic='';
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  chips.forEach(function(ch){ ch.addEventListener('click',function(){ chips.forEach(function(x){x.setAttribute('aria-pressed','false');}); ch.setAttribute('aria-pressed','true'); topic=ch.getAttribute('data-topic'); document.getElementById('cf-topic').value=topic; document.getElementById('cf-subject').value='lucasarana.com: '+topic; }); });
+
+  function fallbackMail(fields, subject){
+    var body=Object.keys(fields).map(function(k){return k+': '+fields[k];}).join('\n');
+    window.location.href='mailto:'+TO+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  }
+  function serialize(form){ var o={}; new FormData(form).forEach(function(v,k){ if(k.charAt(0)!=='_' && v) o[k]=v; }); return o; }
+  function hutk(){ var m=document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/); return m?m[1]:null; }
+  function hsPayload(fields, isNews){
+    var f=[]; function add(n,v){ if(v) f.push({objectTypeId:'0-1', name:n, value:v}); }
+    add('email', fields.email);
+    if(!isNews){
+      var name=(fields.name||'').trim(), sp=name.indexOf(' ');
+      add('firstname', sp>0?name.slice(0,sp):name); if(sp>0) add('lastname', name.slice(sp+1));
+      add('company', fields.company);
+      add('message', (fields.topic?'['+fields.topic+'] ':'')+(fields.message||''));
+    }
+    var ctx={pageUri:location.href, pageName:document.title}; var h=hutk(); if(h) ctx.hutk=h;
+    return {fields:f, context:ctx};
+  }
+  function wire(form, statusEl, okText, guid, isNews){
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      if(!form.checkValidity()){ form.reportValidity(); return; }
+      if(form.querySelector('[name=_gotcha]').value) return;
+      var btn=form.querySelector('button[type=submit]'); var fields=serialize(form);
+      var subject=(form.querySelector('[name=_subject]')||{}).value||'lucasarana.com';
+      if(!guid){ fallbackMail(fields, subject); statusEl.textContent='Opening your email client with the message prefilled. If nothing opens, write to '+TO+'.'; statusEl.className='status'; return; }
+      btn.disabled=true; statusEl.textContent='Sending…'; statusEl.className='status';
+      fetch('https://api.hsforms.com/submissions/v3/integration/submit/'+HS_PORTAL+'/'+guid,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(hsPayload(fields,isNews))}).then(function(r){
+        if(r.ok){ form.reset(); chips.forEach(function(x){x.setAttribute('aria-pressed','false');}); statusEl.textContent=okText; statusEl.className='status ok'; }
+        else { throw new Error('bad status'); }
+      }).catch(function(){ statusEl.textContent='That did not go through. Email me directly at '+TO+'.'; statusEl.className='status err'; }).finally(function(){ btn.disabled=false; });
+    });
+  }
+  wire(document.getElementById('contactform'), document.getElementById('cf-status'), 'Got it. I read these myself and will answer from Buenos Aires, usually within a working day.', HS_FORM_CONTACT, false);
+  wire(document.getElementById('newsform'), document.getElementById('news-status'), 'Saved. You get the first issue of Southbound when it ships.', HS_FORM_NEWSLETTER, true);
+})();
+</script>
+</body>
+</html>
