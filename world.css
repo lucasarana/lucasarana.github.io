@@ -51,3 +51,6 @@ dialog{position:fixed;margin:auto;max-height:88dvh;overflow:auto;color:var(--ink
 .explore-link:disabled{opacity:.5;cursor:wait}
 .contact-shortcut:focus-visible,#connect-hero:focus-visible,.explore-link:focus-visible{outline:2px solid var(--mint);outline-offset:5px}
 @media(max-width:600px){.topbar{gap:12px}.top-actions{gap:7px}.top-actions #profile-open{display:none}.contact-shortcut{gap:6px;min-height:34px;padding:7px 9px;font-size:9px}.linkedin-mark{width:14px;height:14px;font-size:10px}.intro-copy{bottom:9.5%}.intro-start{gap:2px}#connect-hero{min-height:48px;font-size:11px;padding:15px 18px;gap:16px}.explore-link{min-height:40px;font-size:11px}.intro-signature{margin-top:10px}}
+
+/* A crawlable route to the text portfolio, also available during the flight. */
+.world-footer>a{pointer-events:auto;padding:6px 0;margin:-6px 0}.world-footer>a:hover{color:var(--mint)}.world-footer>a:focus-visible{outline:2px solid var(--mint);outline-offset:5px}

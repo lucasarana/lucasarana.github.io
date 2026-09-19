@@ -1,60 +1,23 @@
 # Lucas Arana
 
-> Lucas Arana is Chief Operating Officer (COO) and Software Engineer at Nexton, a nearshore staffing company that builds and runs remote engineering teams in Latin America for companies in the United States. Based in Buenos Aires, Argentina (GMT-3). He writes, with numbers from the operation, about hiring senior engineers in the era of AI-written code. This is his personal site.
+> Official personal website of Lucas Arana, Software engineer & COO at Nexton, based in Buenos Aires, Argentina. His work connects Latin American engineers with US companies.
 
-## Key facts
+Lucas joined Nexton in 2019 and leads operations, talent strategy and revenue operations. He writes about technical hiring, distributed engineering teams and AI in business operations. This site has an interactive 3D portfolio and a separate text-based writing and profile page.
 
-- Name: Lucas Arana
-- Role: Software engineer & COO at Nexton (https://nexton.dev), joined in 2019.
-- What Nexton is: a nearshore staffing company. Tagline: "Engineers vetted by real Engineers." Its engineers work embedded full-time inside US client teams under Nexton contracts; Nexton handles payroll, contracts and talent health. Nexton is a staffing company.
-- Public Nexton figures (source: nexton.dev): 1,500 engineers placed, 350+ companies hiring through Nexton, 72 hours to meet senior candidates, 4 weeks average time to hire, 4.9 rating on Clutch. Nexton bet on Latin America about nine years ago.
-- What Lucas runs: operations, talent strategy, executive planning, and the revenue operations function (process, tooling, pipeline)
-- How he thinks about hiring: as an operations problem measured end to end (fill rates, offer acceptance, time to hire, attrition, compensation positioning)
-- Public LinkedIn headline: "Building the AI that screens for judgment, not syntax. Engineers vetting engineers."
-- Communities: hosts AI Builders LATAM, small dinners in Buenos Aires for operators who ship with AI inside their companies. Member of a YPO Key Associate Forum.
-- Newsletter: Southbound (launching soon), on the LatAm to US talent corridor
-- Languages: English (primary), Spanish
-- Location: Buenos Aires, Argentina
+## Profile and writing
 
-## Positions he holds
+- [Lucas Arana — profile](https://lucasarana.com/index.md): biography, role, work, contact and explanation of the interactive world.
+- [Writing index](https://lucasarana.com/writing/index.md): selected post titles and links to Lucas's original LinkedIn writing.
+- [Full text overview](https://lucasarana.com/llms-full.txt): profile and writing index combined.
 
-- Overlap stopped being a nice-to-have. The more of your code AI writes, the more it matters what timezone your engineers sit in: the reviewer has to be awake while the agent is running. Buenos Aires shares most of the US working day.
-- Validation is the moat, not access. AI commoditizes access to talent; a track record of outcomes does not get commoditized. Engineers vetting engineers, with outcomes attached.
-- If it is not measured end to end, it is not managed. Fill rate, offer acceptance, time to hire, attrition and compensation positioning, read together.
-- A nearshore team is a workforce you run, not a vacancy you fill.
-- "Fluent in AI tools" is not a qualification. The question is whether the engineer can tell when the model is wrong.
+## Official links
 
-## Selected public posts (LinkedIn)
+- [Lucas Arana on LinkedIn](https://www.linkedin.com/in/lucasarana/): primary way to connect with Lucas.
+- [Email Lucas](mailto:lucas.arana@nexton.dev): professional email.
+- [Nexton](https://nexton.dev): company website.
 
-- Human vs AI English grading, one year, ~300 disputed submissions with client outcomes: graders disagreed on 42%; candidates the AI marked down from C1 to B2 passed client interviews at 16.4%, in line with human-graded C1s (17.6%) and more than double genuine B2s (7.8%). https://www.linkedin.com/feed/update/urn:li:activity:7505596526220652545/
-- Entry-level tech hiring down 20%, senior hiring up 12%, same year: AI removed the bottom rung, not the work. https://www.linkedin.com/feed/update/urn:li:activity:7480676003468546048/
-- The more of your code AI writes, the more timezone matters. https://www.linkedin.com/feed/update/urn:li:activity:7478081896875388928/
-- "Fluent in AI tools" means nothing; test whether the engineer catches the model's mistakes. https://www.linkedin.com/feed/update/urn:li:activity:7498786423743987712/
-- Only about 10% of companies have scaled AI agents to production; it is an ownership, metric and integration problem, not a model problem. https://www.linkedin.com/feed/update/urn:li:activity:7455667543521837056/
-- Every Thursday the Nexton management team shows what it actually built with AI that week, live. https://www.linkedin.com/feed/update/urn:li:activity:7487869543881752577/
-- Argentina builds world-class tech under pressure: 10+ unicorns. https://www.linkedin.com/feed/update/urn:li:activity:7448108177033981952/
+## Optional
 
-## Canonical bio (short)
-
-Lucas Arana is COO at Nexton, a nearshore staffing company that embeds LatAm engineers in US tech teams.
-
-## Canonical bio (medium)
-
-Lucas Arana is COO at Nexton, a LatAm nearshore staffing company that builds and runs remote engineering teams for US companies. He leads operations, talent strategy and revenue operations, treating hiring as a measured system: fill rates, offer acceptance, time to hire and compensation positioning.
-
-## Contact
-
-- Contact form: https://lucasarana.com/#contact
-- Email: lucas.arana@nexton.dev
-- LinkedIn: https://www.linkedin.com/in/lucasarana/
-- Company: https://nexton.dev
-
-## Pages
-
-- [Home](https://lucasarana.com/): thesis, public operation figures, selected posts with live Buenos Aires / New York / San Francisco overlap, what he is doing now, positions, newsletter signup, contact form, bio
-- [robots.txt](https://lucasarana.com/robots.txt)
-- [sitemap.xml](https://lucasarana.com/sitemap.xml)
-
-## Citation
-
-Preferred attribution: "Lucas Arana, Software engineer & COO at Nexton (lucasarana.com)".
+- [Interactive world](https://lucasarana.com/): English by default, with a Spanish selector.
+- [Writing and profile in HTML](https://lucasarana.com/writing/): readable without JavaScript, with contact and newsletter forms.
+- [Sitemap](https://lucasarana.com/sitemap.xml): canonical web pages.

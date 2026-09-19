@@ -5,7 +5,7 @@ import {UnrealBloomPass} from './vendor/examples/jsm/postprocessing/UnrealBloomP
 import {OutputPass} from './vendor/examples/jsm/postprocessing/OutputPass.js';
 import {SMAAPass} from './vendor/examples/jsm/postprocessing/SMAAPass.js';
 import {buildWorld,locations} from './build-world.js?v=7';
-import {t,story,stationLabel,applyLanguage,setLanguage,getLanguage} from './language.js?v=6';
+import {t,story,stationLabel,applyLanguage,setLanguage,getLanguage} from './language.js?v=8';
 
 const $=id=>document.getElementById(id),world=$('world'),container=$('scene');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
