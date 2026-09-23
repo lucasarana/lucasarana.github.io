@@ -16,7 +16,7 @@ const graphicsDebug=['localhost','127.0.0.1'].includes(location.hostname)&&new U
 let graphicsFrames=0,graphicsSeconds=0,graphicsReported=false,antialiasing='';
 const introView=()=>mobile()?75:innerWidth<1050?57:43;
 const playingView=()=>mobile()?79:innerWidth<1050?58:45;
-const state={started:false,connected:new Set(),complete:false,flight:null,current:null,sound:false,paused:false,keys:new Set(),lastArrival:null,status:'ready',discoveryMode:'note'};
+const state={started:false,connected:new Set(),complete:false,flight:null,current:null,sound:false,paused:false,keys:new Set(),status:'ready',discoveryMode:'note'};
 applyLanguage();
 let renderer,scene,camera,composer,bloom,built,frame,clock,lastTime=0,elapsed=0;
 const target=new THREE.Vector3(),targetGoal=new THREE.Vector3();
@@ -78,7 +78,7 @@ $('start').addEventListener('click',()=>start());
 function goTo(id){
  const loc=locations.find(x=>x.id===id);if(!loc||!built)return;
  if(!state.started)start(false);
- state.keys.clear();state.lastArrival=null;state.current=null;
+ state.keys.clear();state.current=null;
  $('discovery').classList.add('hidden');
  document.querySelectorAll('[data-destination]').forEach(b=>b.classList.toggle('selected',b.dataset.destination===id));
  const from=built.ship.position.clone(),to=loc.pad.clone();to.y+=.2;
@@ -90,7 +90,7 @@ function goTo(id){
 document.querySelectorAll('[data-destination]').forEach(button=>button.addEventListener('click',()=>goTo(button.dataset.destination)));
 
 function arrive(id){
- state.current=id;state.lastArrival=id;state.status='landed';state.discoveryMode='note';renderMission();
+ state.current=id;state.status='landed';state.discoveryMode='note';renderMission();
  if(id==='us'&&state.connected.size===3){complete();return;}
  renderDiscovery();$('discovery').classList.remove('hidden');tone(523.25,.25,.025);
 }
@@ -151,7 +151,7 @@ function makeBurst(position,color,count=75){
  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));const mat=new THREE.PointsMaterial({color,size:.12,transparent:true,opacity:1,depthWrite:false});const mesh=new THREE.Points(geometry,mat);scene.add(mesh);burst={mesh,velocities,time:0};
 }
 function reset(){
- state.connected.clear();state.complete=false;state.current=null;state.lastArrival=null;state.flight=null;state.keys.clear();
+ state.connected.clear();state.complete=false;state.current=null;state.flight=null;state.keys.clear();
  document.querySelectorAll('dialog[open]').forEach(x=>x.close());$('discovery').classList.add('hidden');
  built.routes.forEach(r=>{r.active=false;r.tube.material.opacity=.14;r.line.material.opacity=.45;});
  built.islands.forEach(loc=>{loc.beacon.material=new THREE.MeshStandardMaterial({color:loc.color,emissive:loc.color,emissiveIntensity:2.7});labels.get(loc.id).classList.remove('connected');});
@@ -185,9 +185,16 @@ function animate(){
  built.update(elapsed,dt,reduced);
  const ship=built.ship;lastShipPosition.copy(ship.position);
  if(state.flight){const f=state.flight;f.time+=dt;const t=Math.min(f.time/f.duration,1),eased=t*t*(3-2*t);ship.position.copy(f.curve.getPoint(eased));if(t>=1){state.flight=null;arrive(f.id);}}
- else if(state.keys.size){const forward=new THREE.Vector3(-Math.sin(yaw),0,-Math.cos(yaw)),right=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));const input=new THREE.Vector3();if(state.keys.has('w')||state.keys.has('arrowup'))input.add(forward);if(state.keys.has('s')||state.keys.has('arrowdown'))input.sub(forward);if(state.keys.has('a')||state.keys.has('arrowleft'))input.sub(right);if(state.keys.has('d')||state.keys.has('arrowright'))input.add(right);input.normalize().multiplyScalar(dt*16);ship.position.add(input);ship.position.x=THREE.MathUtils.clamp(ship.position.x,-26,26);ship.position.z=THREE.MathUtils.clamp(ship.position.z,-27,27);ship.position.y=THREE.MathUtils.lerp(ship.position.y,5,.025);state.lastArrival=null;}
+ else if(state.keys.size){const forward=new THREE.Vector3(-Math.sin(yaw),0,-Math.cos(yaw)),right=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));const input=new THREE.Vector3();if(state.keys.has('w')||state.keys.has('arrowup'))input.add(forward);if(state.keys.has('s')||state.keys.has('arrowdown'))input.sub(forward);if(state.keys.has('a')||state.keys.has('arrowleft'))input.sub(right);if(state.keys.has('d')||state.keys.has('arrowright'))input.add(right);input.normalize().multiplyScalar(dt*16);ship.position.add(input);ship.position.x=THREE.MathUtils.clamp(ship.position.x,-26,26);ship.position.z=THREE.MathUtils.clamp(ship.position.z,-27,27);ship.position.y=THREE.MathUtils.lerp(ship.position.y,5,.025);}
  else if(!reduced){ship.position.y+=Math.sin(elapsed*3)*.0025;}
- if(state.started&&!state.flight&&state.keys.size){for(const loc of locations){const distance=Math.hypot(ship.position.x-loc.pad.x,ship.position.z-loc.pad.z);if(distance<1.45&&state.lastArrival!==loc.id){state.keys.clear();ship.position.copy(loc.pad);ship.position.y+=.2;arrive(loc.id);break;}}}
+ if(state.started&&!state.flight&&state.keys.size){
+  for(const loc of locations){
+   const distance=Math.hypot(ship.position.x-loc.pad.x,ship.position.z-loc.pad.z);
+   const previousDistance=Math.hypot(lastShipPosition.x-loc.pad.x,lastShipPosition.z-loc.pad.z);
+   // Land only when entering the pad from outside, so a departure cannot redock.
+   if(distance<1.45&&previousDistance>=1.45){state.keys.clear();ship.position.copy(loc.pad);ship.position.y+=.2;arrive(loc.id);break;}
+  }
+ }
  velocity.copy(ship.position).sub(lastShipPosition);const speed=velocity.length()/Math.max(dt,.001);
  if(speed>.05){const angle=Math.atan2(-velocity.x,-velocity.z);let delta=angle-ship.rotation.y;delta=Math.atan2(Math.sin(delta),Math.cos(delta));ship.rotation.y+=delta*.12;ship.rotation.z=THREE.MathUtils.lerp(ship.rotation.z,THREE.MathUtils.clamp(delta*.17,-.3,.3),.08);}else ship.rotation.z*=.92;
  trailClock+=dt;if(speed>1&&trailClock>.06){trailClock=0;const m=built.trail[trailIndex++%built.trail.length];m.position.copy(ship.position);m.userData.life=1;m.visible=true;}
